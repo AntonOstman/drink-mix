@@ -24,6 +24,6 @@ void menuItem::action(buttonType button){
   }
 
 void menuItem::select(){
-  lcd->print("base");
+  lcd->print("parent");
   
   }
