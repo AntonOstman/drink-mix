@@ -2,12 +2,12 @@
 #include <LiquidCrystal.h>
 
 menuItem::menuItem(char menuText[], LiquidCrystal& lcd){
-this->menuText = menuText;
-this->lcd = &lcd;
+  this->menuText = menuText;
+  this->lcd = &lcd;
 }
 
 int menuItem::getSize(){
-return strlen(menuText);
+  return strlen(menuText);
 }
 
 void menuItem::printAll(){

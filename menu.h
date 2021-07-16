@@ -16,6 +16,7 @@ class menu {
     
   public:
     menu(int menuSize, LiquidCrystal& lcd);
+    virtual ~menu();
     void nextItem();
     void action(buttonType button);
     void printCurrent();
