@@ -19,31 +19,18 @@ int menyUp = 0;
 int menyLeftRight = 0;
 
 // Creates an LCD object. Parameters: (rs, enable, d4, d5, d6, d7)
-LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
+//LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
+lcdHandler lcd(8, 9, 4, 5, 6, 7);
 
-//menuItem texts[] = {menu1Pointer, menu1Pointer ,menu1Pointer};
-
-
-
-void setup() {
-  // put your setup code here, to run once:
-    lcd.begin(16, 2);
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.cursor();
-    pinMode(pumpPinThree, OUTPUT);
-    pinMode(pumpPinTwo, OUTPUT);
-}
-
-char q1[] = "hejsan1";
+char q1[] = "asdf";
 char q2[] = "hejsan2";
 char q3[] = "hejsan3";
 char q4[] = "hejsan4";
   
-menuPrinter menu1(q1,lcd);
-menuPrinter menu2(q2,lcd);
-menuItem menu3(q3,lcd);
-menuItem menu4(q4,lcd);
+menuPrinter menu1(q1, lcd);
+menuPrinter menu2(q2, lcd);
+menuItem menu3(q3,  lcd);
+menuItem menu4(q4,  lcd);
 
 menuPrinter *menu1Pointer = &menu1;
 menuPrinter *menu2Pointer = &menu2;
@@ -52,20 +39,38 @@ menuItem *menu4Pointer = &menu4;
   
 int menuSize = 4;
 menu menus(menuSize, lcd);
-lcdHandler lcdhandler(menus,lcd);
+
+
+
+//menuItem texts[] = {menu1Pointer, menu1Pointer ,menu1Pointer};
+
+
+
+void setup() {
+  // put your setup code here, to run once:
+    lcd.setMenu(menus);
+    lcd.begin(16, 2);
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.cursor();
+    pinMode(pumpPinThree, OUTPUT);
+    pinMode(pumpPinTwo, OUTPUT);
+}
+
+
 
 void loop() {
 
-  menus.addMenuItem(0,menu1Pointer);
-  menus.addMenuItem(1,menu2Pointer);
-  menus.addMenuItem(2,menu3Pointer);
-  menus.addMenuItem(3,menu4Pointer);
+  menus.addMenuItem(0, menu1Pointer);
+  menus.addMenuItem(1, menu2Pointer);
+  menus.addMenuItem(2, menu3Pointer);
+  menus.addMenuItem(3, menu4Pointer);
   // put your main code here, to run repeatedly:
 
-  int newKey = lcdhandler.getNewKey();
+  int newKey = lcd.getNewKey();
   
-  lcdhandler.doKey(newKey);
-  lcdhandler.setCursorPos();
+  lcd.doKey(newKey);
+  lcd.setCursorPos();
 }
 
 void toggleOutput(int pin){

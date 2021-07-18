@@ -4,13 +4,13 @@
 #include "buttonType.h"
 #include "menu.h"
 #include <Arduino.h>
-#include <LiquidCrystal.h>
+#include "lcdHandler.h"
 
 class menuTwo: public menu{
   
   public:
   // use super class to construct
-    menuTwo(int menuSize, LiquidCrystal& lcd): menu(menuSize, lcd){}
+    menuTwo(int menuSize, lcdHandler& lcd): menu(menuSize, lcd){}
     
   };
 

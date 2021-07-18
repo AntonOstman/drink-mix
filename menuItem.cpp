@@ -1,7 +1,8 @@
 #include "menuItem.h"
-#include <LiquidCrystal.h>
+#include "lcdHandler.h"
 
-menuItem::menuItem(char menuText[], LiquidCrystal& lcd){
+
+menuItem::menuItem(char menuText[], lcdHandler& lcd){
   this->menuText = menuText;
   this->lcd = &lcd;
 }

@@ -1,10 +1,10 @@
+
 #include "lcdHandler.h"
 #include "menu.h"
 
-lcdHandler::lcdHandler(menu& newMenu, LiquidCrystal& lcd){
-  this->currentMenu = &newMenu;
-  this->lcd = &lcd;
-  }
+//lcdHandler::lcdHandler(int rs, int en, int d0, int d1, int d2, int d3) : LiquidCrystal(rs, en, d0, d1, d2, d3){
+ // this->currentMenu = nullptr;
+  //
 
 void lcdHandler::changeMenu(menu& newMenu){
   currentMenu = &newMenu;
@@ -14,6 +14,11 @@ void lcdHandler::changeMenu(menu& newMenu){
  void lcdHandler::printAllMenus(){
   currentMenu->printMenus();
   }
+
+void lcdHandler::setMenu(menu& newMenu){
+    this->currentMenu = &newMenu;
+
+}
 
  void lcdHandler::printCurrent(){
   currentMenu->printCurrent();

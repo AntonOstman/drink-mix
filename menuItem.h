@@ -1,17 +1,18 @@
 #ifndef MY_MENUITEM_H // header guards
 #define MY_MENUITEM_H
-
-#include "buttonType.h"
 #include <Arduino.h>
-#include <LiquidCrystal.h>
+#include "buttonType.h"
+
+class lcdHandler;
+
 class menuItem{
   protected:
     char* menuText;
-    LiquidCrystal* lcd;
+    lcdHandler* lcd;
     
   public:
 
-    menuItem(char menuText[], LiquidCrystal& lcd);
+    menuItem(char menuText[], lcdHandler& lcd);
     virtual ~menuItem();
     void action(buttonType button);
     void printAll();

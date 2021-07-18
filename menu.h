@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include "menuItem.h"
 #include "buttonType.h"
-#include <LiquidCrystal.h>
+#include "lcdHandler.h"
 
 class menu {
   private:
@@ -12,10 +12,10 @@ class menu {
     int selectedMenu;
     int menuSize;
     menuItem** menuItems;
-    LiquidCrystal* lcd;
+    lcdHandler* lcd;
     
   public:
-    menu(int menuSize, LiquidCrystal& lcd);
+    menu(int menuSize, lcdHandler& lcd);
     virtual ~menu();
     void nextItem();
     void action(buttonType button);

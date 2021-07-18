@@ -1,10 +1,9 @@
 //#include <Keyboard.h>
 
 #include "menu.h"
-#include "menuItem.h"
-#include <LiquidCrystal.h>
 
-menu::menu(int menuSize, LiquidCrystal& lcd) {
+
+menu::menu(int menuSize, lcdHandler& lcd) {
   this->menuItems = new menuItem*[menuSize];
   this->lcd = &lcd;
   this->menuSize = menuSize;
