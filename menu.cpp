@@ -14,7 +14,7 @@ menu::menu(int menuSize, LiquidCrystal& lcd) {
   }
 
 menu::~menu(){
-  delete lcd;
+  
   // we need to destroy the menuItem objects inside of the array of pointers
   for(int i = 0; i  < menuSize; i++){
     delete menuItems[i];

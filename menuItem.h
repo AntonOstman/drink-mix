@@ -12,6 +12,7 @@ class menuItem{
   public:
 
     menuItem(char menuText[], LiquidCrystal& lcd);
+    virtual ~menuItem();
     void action(buttonType button);
     void printAll();
     int getSize();

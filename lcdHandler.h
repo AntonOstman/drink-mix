@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include "menu.h"
 #include <LiquidCrystal.h>
+
 class lcdHandler {
   private:
     menu* currentMenu;
@@ -22,7 +23,5 @@ class lcdHandler {
     int getKey();
     int getNewKey();
   };
-
-
 
   #endif

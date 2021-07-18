@@ -6,6 +6,10 @@ menuItem::menuItem(char menuText[], LiquidCrystal& lcd){
   this->lcd = &lcd;
 }
 
+menuItem::~menuItem(){
+  delete menuText;
+}
+
 int menuItem::getSize(){
   return strlen(menuText);
 }
@@ -22,6 +26,7 @@ void menuItem::action(buttonType button){
     }
   
   }
+
 
 void menuItem::select(){
   lcd->print("parent");
