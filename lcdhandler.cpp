@@ -1,29 +1,26 @@
 
-#include "lcdHandler.h"
-#include "menu.h"
+#include "LcdHandler.h"
+#include "Menu.h"
 
 //lcdHandler::lcdHandler(int rs, int en, int d0, int d1, int d2, int d3) : LiquidCrystal(rs, en, d0, d1, d2, d3){
  // this->currentMenu = nullptr;
   //
 
-void lcdHandler::changeMenu(menu& newMenu){
+void LcdHandler::changeMenu(Menu& newMenu){
   currentMenu = &newMenu;
 
   }
 
- void lcdHandler::printAllMenus(){
-  currentMenu->printMenus();
-  }
 
-void lcdHandler::setMenu(menu& newMenu){
+void LcdHandler::setMenu(Menu& newMenu){
     this->currentMenu = &newMenu;
 
 }
 
- void lcdHandler::printCurrent(){
+ void LcdHandler::printCurrent(){
   currentMenu->printCurrent();
   }
- void lcdHandler::nextItem(){
+ void LcdHandler::nextItem(){
   currentMenu->nextItem();
   }
 
@@ -33,7 +30,7 @@ void lcdHandler::setMenu(menu& newMenu){
  * 
  * 
  */
-int lcdHandler::getNewKey(){
+int LcdHandler::getNewKey(){
   // wait until the current buttonm, if any, is released
   while(getKey() != 0){
     // do nothing
@@ -50,7 +47,7 @@ int lcdHandler::getNewKey(){
 
 
 
-void lcdHandler::doKey(int key){
+void LcdHandler::doKey(int key){
     
   switch(key){
     case 0:
@@ -74,7 +71,7 @@ void lcdHandler::doKey(int key){
      }
   }
 
-void lcdHandler::setCursorPos(){
+void LcdHandler::setCursorPos(){
   currentMenu->setCursorPos();
   
   }
@@ -90,7 +87,7 @@ void lcdHandler::setCursorPos(){
  * which means when button 1 is pressed there is a total of circa 2k ohm resistance
  */
 
-int lcdHandler::getKey(){
+int LcdHandler::getKey(){
   int analogPin = A0;
   int val = analogRead(analogPin);
   if (val > 800){

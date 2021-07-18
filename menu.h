@@ -2,33 +2,35 @@
 #ifndef MY_MENU_H // header guards
 #define MY_MENU_H
 #include <Arduino.h>
-#include "menuItem.h"
-#include "buttonType.h"
-#include "lcdHandler.h"
+#include "MenuItem.h"
+#include "ButtonType.h"
 
-class menu {
+class LcdHandler;
+
+class Menu {
   private:
     int cursorPos;
     int selectedMenu;
     int menuSize;
-    menuItem** menuItems;
-    lcdHandler* lcd;
+    MenuItem** menuItems;
+    LcdHandler* lcd;
     
   public:
-    menu(int menuSize, lcdHandler& lcd);
-    virtual ~menu();
+    Menu(int menuSize, LcdHandler& lcd);
+    virtual ~Menu();
     void nextItem();
-    void action(buttonType button);
+    void action(ButtonType button);
     void printCurrent();
-    void printMenus();
+    void printMenus(ButtonType buttontype);
     void setCursorPos();
-    void addMenuItem(int index, menuItem* item);
+    void addMenuItem(int index, MenuItem* item);
     int getMenuItemAmount();
+    void printMenu(int index);
     virtual void select();
     virtual void up();
     virtual void down();
     virtual void left();
     virtual void right();
-    menuItem getMenuItem(int index);
+    MenuItem getMenuItem(int index);
   };
  #endif

@@ -1,20 +1,20 @@
 #ifndef MY_MENUITEM_H // header guards
 #define MY_MENUITEM_H
 #include <Arduino.h>
-#include "buttonType.h"
+#include "ButtonType.h"
 
-class lcdHandler;
+class LcdHandler;
 
-class menuItem{
+class MenuItem{
   protected:
     char* menuText;
-    lcdHandler* lcd;
+    LcdHandler* lcd;
     
   public:
 
-    menuItem(char menuText[], lcdHandler& lcd);
-    virtual ~menuItem();
-    void action(buttonType button);
+    MenuItem(char menuText[], LcdHandler& lcd);
+    virtual ~MenuItem();
+    void action(ButtonType button);
     void printAll();
     int getSize();
     virtual void select();

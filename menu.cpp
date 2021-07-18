@@ -1,10 +1,10 @@
 //#include <Keyboard.h>
 
-#include "menu.h"
-
-
-menu::menu(int menuSize, lcdHandler& lcd) {
-  this->menuItems = new menuItem*[menuSize];
+#include "Menu.h"
+#include "LcdHandler.h"
+#include "ButtonType.h"
+Menu::Menu(int menuSize, LcdHandler& lcd) {
+  this->menuItems = new MenuItem*[menuSize];
   this->lcd = &lcd;
   this->menuSize = menuSize;
   selectedMenu = 0;
@@ -12,7 +12,7 @@ menu::menu(int menuSize, lcdHandler& lcd) {
   
   }
 
-menu::~menu(){
+Menu::~Menu(){
   
   // we need to destroy the menuItem objects inside of the array of pointers
   for(int i = 0; i  < menuSize; i++){
@@ -23,131 +23,75 @@ menu::~menu(){
 
 }
 
-int menu::getMenuItemAmount(){
+int Menu::getMenuItemAmount(){
   return menuSize;
   
   }
 
-void menu::printMenus(){
-  for(int i=0; i < menuSize; i++ ){
-      menuItems[i]->printAll();
-    }
-    
-  }
-void menu::printCurrent(){
-  menuItems[selectedMenu]->printAll();
+void Menu::printMenus(ButtonType buttontype){
+  // if selected menu is out of range then do nothing
+  // otherwise we print the menus which are selected
   
-  }
-  
-  void menu::nextItem(){
-    
-    if (sizeof(menuItems) == selectedMenu){
-      cursorPos = 0;
-      selectedMenu = 0;
-      }
-    else{
-      int textSize = 0;
-      textSize = menuItems[selectedMenu]->getSize();
-      cursorPos = cursorPos + textSize;
-      
-      selectedMenu++;
+  if (buttontype == DOWN){
+    if (!(selectedMenu > 0)){
+      return;
     }
-   }
+    selectedMenu--;
+  }
+  else if (buttontype == UP){
+    if (!(selectedMenu < menuSize - 1)){
 
-void menu::setCursorPos(){
+      return;
+    }
+    selectedMenu++;
+  }
+ 
+  lcd->clear();
+  lcd->setCursor(0,0);
+  printMenu(selectedMenu);
+  lcd->setCursor(0,1);
+  if (selectedMenu > 0){
+    printMenu(selectedMenu - 1);  
+    }
+  }
+
+void Menu::printMenu(int index){
+  menuItems[index]->printAll();
+  
+  }
+
+
+void Menu::setCursorPos(){
   lcd->setCursor(cursorPos, 0);
   }
 
-void menu::addMenuItem(int index, menuItem* item){
+void Menu::addMenuItem(int index, MenuItem* item){
   menuItems[index] = item;
   
   }
 
-menuItem menu::getMenuItem(int index){
+MenuItem Menu::getMenuItem(int index){
   return *menuItems[index];
   }
-    void menu::select(){
-      menuItems[selectedMenu]->select();
-    
-    }
-    void menu::up(){
-    if(selectedMenu < menuSize - 1){
-      selectedMenu++;
-      lcd->clear();
-      lcd->setCursor(0,0);
-      menuItems[selectedMenu]->printAll();
-      lcd->setCursor(0,1);
-      menuItems[selectedMenu - 1]->printAll();
-      } 
-    lcd->print(selectedMenu);
 
-    }
-    void menu::down(){
-    if(selectedMenu > 0){
-      selectedMenu--;
-      lcd->clear();
-      lcd->setCursor(0,0);
-      menuItems[selectedMenu]->printAll();
-      lcd->setCursor(0,1);
-      if(selectedMenu != 0){
-        menuItems[selectedMenu - 1]->printAll();
-        }
-      }
-    }
-    void menu::left(){
-
-    }
-    void menu::right(){
-
-
-    }
-void menu::action(buttonType button){
-
-  switch(button){
-    case DOWN:
-     if(selectedMenu > 0){
-      selectedMenu--;
-      lcd->clear();
-      lcd->setCursor(0,0);
-      menuItems[selectedMenu]->printAll();
-      lcd->setCursor(0,1);
-      if(selectedMenu != 0){
-        menuItems[selectedMenu - 1]->printAll();
-        }
-      }
-      break;
-
-    case UP:
-    // menuSize -1 so that selected menu does not reach the maximum.
-    if(selectedMenu < menuSize - 1){
-      selectedMenu++;
-      lcd->clear();
-      lcd->setCursor(0,0);
-      menuItems[selectedMenu]->printAll();
-      lcd->setCursor(0,1);
-      menuItems[selectedMenu - 1]->printAll();
-      } 
-      lcd->print(selectedMenu);
-      break;
-
-    case LEFT:
-//     lcd->print("3");
-
-      break;
-      
-    case RIGHT:
-//     lcd->print("2");
-
-      break;
-    case SELECT:
-      menuItems[selectedMenu]->select();
-      break;
-    default:
-      lcd->print("error");
-      break;
+  void Menu::select(){
+    menuItems[selectedMenu]->select();
   
   }
-}
+  void Menu::up(){
+    printMenus(UP);
+
+  }
+  void Menu::down(){
+    printMenus(DOWN);
+  
+  }
+  void Menu::left(){
+
+  }
+  void Menu::right(){
+
+  }
 
 
    

@@ -2,10 +2,10 @@
 
 // include the library code:
 #include <LiquidCrystal.h>
-#include "menuItem.h"
-#include "menu.h"
-#include "lcdHandler.h"
-#include "menuItemContainer.h"
+#include "MenuItem.h"
+#include "Menu.h"
+#include "LcdHandler.h"
+#include "MenuItemContainer.h"
 
 
 int analogPin = A0;
@@ -20,25 +20,25 @@ int menyLeftRight = 0;
 
 // Creates an LCD object. Parameters: (rs, enable, d4, d5, d6, d7)
 //LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
-lcdHandler lcd(8, 9, 4, 5, 6, 7);
+LcdHandler lcd(8, 9, 4, 5, 6, 7);
 
 char q1[] = "asdf";
 char q2[] = "hejsan2";
 char q3[] = "hejsan3";
 char q4[] = "hejsan4";
   
-menuPrinter menu1(q1, lcd);
-menuPrinter menu2(q2, lcd);
-menuItem menu3(q3,  lcd);
-menuItem menu4(q4,  lcd);
+MenuPrinter menu1(q1, lcd);
+MenuPrinter menu2(q2, lcd);
+MenuItem menu3(q3,  lcd);
+MenuItem menu4(q4,  lcd);
 
-menuPrinter *menu1Pointer = &menu1;
-menuPrinter *menu2Pointer = &menu2;
-menuItem *menu3Pointer = &menu3;
-menuItem *menu4Pointer = &menu4;
+MenuPrinter *menu1Pointer = &menu1;
+MenuPrinter *menu2Pointer = &menu2;
+MenuItem *menu3Pointer = &menu3;
+MenuItem *menu4Pointer = &menu4;
   
 int menuSize = 4;
-menu menus(menuSize, lcd);
+Menu menus(menuSize, lcd);
 
 
 

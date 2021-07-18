@@ -1,16 +1,16 @@
 #ifndef MY_MENUITEMCONTAINER_H // header guards
 #define MY_MENUITEMCONTAINER_H
 
-#include "lcdHandler.h"
-#include "buttonType.h"
-#include "menuItem.h"
+#include "MenuItem.h"
 #include <Arduino.h>
 
-class menuPrinter: public menuItem{
+class LcdHandler;
+
+class MenuPrinter: public MenuItem{
   
   public:
   // use super class to construct
-    menuPrinter(char menuText[], lcdHandler& lcd): menuItem(menuText, lcd){}
+    MenuPrinter(char menuText[], LcdHandler& lcd): MenuItem(menuText, lcd){}
     void select() override;
   };
 

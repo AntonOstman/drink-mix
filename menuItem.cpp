@@ -1,27 +1,27 @@
-#include "menuItem.h"
-#include "lcdHandler.h"
+#include "MenuItem.h"
+#include "LcdHandler.h"
 
 
-menuItem::menuItem(char menuText[], lcdHandler& lcd){
+MenuItem::MenuItem(char menuText[], LcdHandler& lcd){
   this->menuText = menuText;
   this->lcd = &lcd;
 }
 
-menuItem::~menuItem(){
+MenuItem::~MenuItem(){
   delete menuText;
 }
 
-int menuItem::getSize(){
+int MenuItem::getSize(){
   return strlen(menuText);
 }
 
-void menuItem::printAll(){
+void MenuItem::printAll(){
   for(int i=0; i < getSize(); i++){
     lcd->print(menuText[i]);
     }
   }
 
-void menuItem::action(buttonType button){
+void MenuItem::action(ButtonType button){
   if (button == SELECT){
     lcd->print("com");
     }
@@ -29,7 +29,7 @@ void menuItem::action(buttonType button){
   }
 
 
-void menuItem::select(){
+void MenuItem::select(){
   lcd->print("parent");
   
   }
