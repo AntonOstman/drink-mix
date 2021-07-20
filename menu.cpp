@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "LcdHandler.h"
 #include "ButtonType.h"
+#include "MenuItem.h"
 Menu::Menu(int menuSize, LcdHandler& lcd) {
   this->menuItems = new MenuItem*[menuSize];
   this->lcd = &lcd;
@@ -28,7 +29,19 @@ int Menu::getMenuItemAmount(){
   
   }
 
-void Menu::printMenus(ButtonType buttontype){
+void Menu::printMenus(){
+
+  lcd->clear();
+  lcd->setCursor(0,0);
+  printMenu(selectedMenu);
+  lcd->setCursor(0,1);
+  if (selectedMenu > 0){
+    printMenu(selectedMenu - 1);  
+    }
+  }
+
+
+void Menu::menuButtonPress(ButtonType buttontype){
   // if selected menu is out of range then do nothing
   // otherwise we print the menus which are selected
   
@@ -45,15 +58,8 @@ void Menu::printMenus(ButtonType buttontype){
     }
     selectedMenu++;
   }
- 
-  lcd->clear();
-  lcd->setCursor(0,0);
-  printMenu(selectedMenu);
-  lcd->setCursor(0,1);
-  if (selectedMenu > 0){
-    printMenu(selectedMenu - 1);  
-    }
-  }
+}
+
 
 void Menu::printMenu(int index){
   menuItems[index]->printAll();
@@ -79,11 +85,11 @@ MenuItem Menu::getMenuItem(int index){
   
   }
   void Menu::up(){
-    printMenus(UP);
+    menuButtonPress(UP);
 
   }
   void Menu::down(){
-    printMenus(DOWN);
+    menuButtonPress(DOWN);
   
   }
   void Menu::left(){

@@ -49,29 +49,36 @@ Menu menus(menuSize, lcd);
 void setup() {
   // put your setup code here, to run once:
     lcd.setMenu(menus);
+    menus.addMenuItem(0, menu1Pointer);
+    menus.addMenuItem(1, menu2Pointer);
+    menus.addMenuItem(2, menu3Pointer);
+    menus.addMenuItem(3, menu4Pointer);
+
+
     lcd.begin(16, 2);
     lcd.clear();
     lcd.setCursor(0,0);
     lcd.cursor();
+    lcd.updateScreen();
     pinMode(pumpPinThree, OUTPUT);
     pinMode(pumpPinTwo, OUTPUT);
 }
 
 
-
 void loop() {
 
-  menus.addMenuItem(0, menu1Pointer);
-  menus.addMenuItem(1, menu2Pointer);
-  menus.addMenuItem(2, menu3Pointer);
-  menus.addMenuItem(3, menu4Pointer);
   // put your main code here, to run repeatedly:
+  int key = lcd.getKey();
+  if (lcd.checkNewKey(key)){
+    lcd.doKey(key); 
+    lcd.updateScreen();
+  } 
 
-  int newKey = lcd.getNewKey();
-  
-  lcd.doKey(newKey);
+
   lcd.setCursorPos();
 }
+
+
 
 void toggleOutput(int pin){
   if (light == 1){

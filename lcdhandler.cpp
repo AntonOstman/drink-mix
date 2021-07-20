@@ -7,23 +7,27 @@
   //
 
 void LcdHandler::changeMenu(Menu& newMenu){
-  currentMenu = &newMenu;
+  menu = &newMenu;
 
   }
 
 
 void LcdHandler::setMenu(Menu& newMenu){
-    this->currentMenu = &newMenu;
-
+    this->menu = &newMenu;
 }
 
  void LcdHandler::printCurrent(){
-  currentMenu->printCurrent();
-  }
- void LcdHandler::nextItem(){
-  currentMenu->nextItem();
+  menu->printCurrent();
   }
 
+ void LcdHandler::nextItem(){
+  menu->nextItem();
+  }
+
+void LcdHandler::updateScreen(){
+  menu->printMenus();
+  
+}
 
 /**
  * Loops until a new key is pressed. Then sets oldKey to the key found.
@@ -35,7 +39,6 @@ int LcdHandler::getNewKey(){
   while(getKey() != 0){
     // do nothing
     }
-    
     // wait until a new button is pressed
   int newKey = getKey();
   while(newKey == 0){
@@ -54,25 +57,36 @@ void LcdHandler::doKey(int key){
       // do nothing when no key found
       break;
     case 1:
-      currentMenu-> select();
+      menu-> select();
       break;
     case 2:
-      currentMenu-> up();
+      menu-> up();
       break;
     case 3:
-      currentMenu-> down();
+      menu-> down();
       break;
     case 4:
-      currentMenu -> left();
+      menu -> left();
       break;
     case 5:
-      currentMenu -> right();
+      menu -> right();
       break;
      }
   }
 
+bool LcdHandler::checkNewKey(int newKey){
+  
+  if (newKey != keyPressed){
+    keyPressed = newKey;
+    return true;
+
+  }
+  return false;
+
+}
+
 void LcdHandler::setCursorPos(){
-  currentMenu->setCursorPos();
+  menu->setCursorPos();
   
   }
 

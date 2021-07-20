@@ -2,9 +2,9 @@
 #ifndef MY_MENU_H // header guards
 #define MY_MENU_H
 #include <Arduino.h>
-#include "MenuItem.h"
 #include "ButtonType.h"
 
+class MenuItem;
 class LcdHandler;
 
 class Menu {
@@ -21,11 +21,12 @@ class Menu {
     void nextItem();
     void action(ButtonType button);
     void printCurrent();
-    void printMenus(ButtonType buttontype);
+    void menuButtonPress(ButtonType buttontype);
     void setCursorPos();
     void addMenuItem(int index, MenuItem* item);
     int getMenuItemAmount();
     void printMenu(int index);
+    void printMenus();
     virtual void select();
     virtual void up();
     virtual void down();

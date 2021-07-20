@@ -6,7 +6,8 @@ enum ButtonType {
   DOWN,
   LEFT,
   RIGHT,
-  SELECT
+  SELECT,
+  NONE
   };
   
   #endif
