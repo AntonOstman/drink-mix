@@ -6,41 +6,17 @@
 #include "Menu.h"
 #include "LcdHandler.h"
 #include "MenuItemContainer.h"
+#include "MenuFactory.h"
+#include "MenuType.h"
 
 
-int analogPin = A0;
-int cursorPos = 0;
-int light = 0;
-int pumpPinThree = 3;
-int pumpPinTwo = 2;
-
-
-int menyUp = 0;
-int menyLeftRight = 0;
+int PUMP_ONE = 3;
+int PUMP_TWO = 2;
 
 // Creates an LCD object. Parameters: (rs, enable, d4, d5, d6, d7)
 //LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 LcdHandler lcd(8, 9, 4, 5, 6, 7);
-
-char q1[] = "asdf";
-char q2[] = "hejsan2";
-char q3[] = "hejsan3";
-char q4[] = "hejsan4";
-  
-MenuPrinter menu1(q1, lcd);
-MenuPrinter menu2(q2, lcd);
-MenuItem menu3(q3,  lcd);
-MenuItem menu4(q4,  lcd);
-
-MenuPrinter *menu1Pointer = &menu1;
-MenuPrinter *menu2Pointer = &menu2;
-MenuItem *menu3Pointer = &menu3;
-MenuItem *menu4Pointer = &menu4;
-  
-int menuSize = 4;
-Menu menus(menuSize, lcd);
-
-
+MenuFactory menuFactory;
 
 //menuItem texts[] = {menu1Pointer, menu1Pointer ,menu1Pointer};
 
@@ -48,11 +24,11 @@ Menu menus(menuSize, lcd);
 
 void setup() {
   // put your setup code here, to run once:
-    lcd.setMenu(menus);
-    menus.addMenuItem(0, menu1Pointer);
-    menus.addMenuItem(1, menu2Pointer);
-    menus.addMenuItem(2, menu3Pointer);
-    menus.addMenuItem(3, menu4Pointer);
+
+    Menu* mainMenu = menuFactory.createMenu(MAIN, lcd);
+
+    lcd.setMenu(*mainMenu);
+
 
 
     lcd.begin(16, 2);
@@ -60,8 +36,8 @@ void setup() {
     lcd.setCursor(0,0);
     lcd.cursor();
     lcd.updateScreen();
-    pinMode(pumpPinThree, OUTPUT);
-    pinMode(pumpPinTwo, OUTPUT);
+    pinMode(PUMP_ONE, OUTPUT);
+    pinMode(PUMP_TWO, OUTPUT);
 }
 
 
@@ -79,12 +55,3 @@ void loop() {
 }
 
 
-
-void toggleOutput(int pin){
-  if (light == 1){
-    digitalWrite(pin, HIGH);
-    }
-  else{    
-    digitalWrite(pin, LOW);
-    }
-  }

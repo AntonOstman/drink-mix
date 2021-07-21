@@ -2,7 +2,10 @@
 #include "LcdHandler.h"
 
 void MenuPrinter::select(){
-  lcd->print("cihld");
-  
+  lcd->clear();
+  lcd->setCursor(0,0);
+  lcd->print("Pumping pump one");
+  lcd->togglePin(lcd->PUMP_ONE);
+  delay(1000);
   }  
 

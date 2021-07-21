@@ -11,6 +11,11 @@ void LcdHandler::changeMenu(Menu& newMenu){
 
   }
 
+void LcdHandler::resetLcd(){
+  clear();
+  setCursor(0,0);
+
+}
 
 void LcdHandler::setMenu(Menu& newMenu){
     this->menu = &newMenu;
@@ -18,6 +23,20 @@ void LcdHandler::setMenu(Menu& newMenu){
 
  void LcdHandler::printCurrent(){
   menu->printCurrent();
+  }
+
+    // toggles a pin on the PORTD row of the arduino
+  void LcdHandler::togglePin(int pin){
+    int pinStatus = bitRead(PORTD, pin);
+    
+
+    if (pinStatus == 0){
+      digitalWrite(pin, HIGH);
+      }
+    else{    
+      digitalWrite(pin, LOW);
+      }
+  
   }
 
  void LcdHandler::nextItem(){
