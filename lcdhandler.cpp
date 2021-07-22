@@ -1,13 +1,10 @@
 
 #include "LcdHandler.h"
 #include "Menu.h"
+#include "MenuFactory.h"
 
-//lcdHandler::lcdHandler(int rs, int en, int d0, int d1, int d2, int d3) : LiquidCrystal(rs, en, d0, d1, d2, d3){
- // this->currentMenu = nullptr;
-  //
-
-void LcdHandler::changeMenu(Menu& newMenu){
-  menu = &newMenu;
+void LcdHandler::changeMenu(Menu* newMenu){
+  currentMenu = newMenu;
 
   }
 
@@ -17,12 +14,31 @@ void LcdHandler::resetLcd(){
 
 }
 
-void LcdHandler::setMenu(Menu& newMenu){
-    this->menu = &newMenu;
+void LcdHandler::setupMenus(){
+  MenuFactory menuFactory;
+  Menu* mainMenu = menuFactory.createMenu(MAIN_MENU, *this);
+  Menu* drinkMenu = menuFactory.createMenu(DRINK_MENU, *this);
+  menus[MAIN_MENU] = mainMenu;
+  menus[DRINK_MENU] = drinkMenu;
+  this->currentMenu = menus[MAIN_MENU];
+
+}
+
+void LcdHandler::changeMenu(MenuType menuType){
+  this->menuType = menuType;
+  currentMenu = menus[menuType];
+}
+
+int LcdHandler::getMenuType(){
+  return menuType;
+}
+
+void LcdHandler::setMenu(Menu* newMenu){
+    this->currentMenu = newMenu;
 }
 
  void LcdHandler::printCurrent(){
-  menu->printCurrent();
+  currentMenu->printCurrent();
   }
 
     // toggles a pin on the PORTD row of the arduino
@@ -40,11 +56,11 @@ void LcdHandler::setMenu(Menu& newMenu){
   }
 
  void LcdHandler::nextItem(){
-  menu->nextItem();
+  currentMenu->nextItem();
   }
 
 void LcdHandler::updateScreen(){
-  menu->printMenus();
+  currentMenu->printMenus();
   
 }
 
@@ -76,19 +92,19 @@ void LcdHandler::doKey(int key){
       // do nothing when no key found
       break;
     case 1:
-      menu-> select();
+      currentMenu-> select();
       break;
     case 2:
-      menu-> up();
+      currentMenu-> up();
       break;
     case 3:
-      menu-> down();
+      currentMenu-> down();
       break;
     case 4:
-      menu -> left();
+      currentMenu -> left();
       break;
     case 5:
-      menu -> right();
+      currentMenu -> right();
       break;
      }
   }
@@ -105,7 +121,7 @@ bool LcdHandler::checkNewKey(int newKey){
 }
 
 void LcdHandler::setCursorPos(){
-  menu->setCursorPos();
+  currentMenu->setCursorPos();
   
   }
 

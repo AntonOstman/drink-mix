@@ -2,8 +2,8 @@
 #define MY_MENUTYPE_H
 
 enum MenuType {
-    MAIN,
-    DRINKMENU
+    MAIN_MENU, // = 0
+    DRINK_MENU // = 1
   };
   
   #endif

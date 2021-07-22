@@ -25,11 +25,7 @@ MenuFactory menuFactory;
 void setup() {
   // put your setup code here, to run once:
 
-    Menu* mainMenu = menuFactory.createMenu(MAIN, lcd);
-
-    lcd.setMenu(*mainMenu);
-
-
+    lcd.setupMenus();
 
     lcd.begin(16, 2);
     lcd.clear();

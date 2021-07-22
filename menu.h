@@ -8,7 +8,7 @@ class MenuItem;
 class LcdHandler;
 
 class Menu {
-  private:
+  protected:
     int cursorPos;
     int selectedMenu;
     int menuSize;

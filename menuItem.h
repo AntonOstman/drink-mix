@@ -7,12 +7,12 @@ class LcdHandler;
 
 class MenuItem{
   protected:
-    char* menuText;
+    const char* menuText;
     LcdHandler* lcd;
     
   public:
 
-    MenuItem(char menuText[], LcdHandler& lcd);
+    MenuItem(const char menuText[], LcdHandler& lcd);
     virtual ~MenuItem();
     void action(ButtonType button);
     void printAll();
@@ -20,8 +20,8 @@ class MenuItem{
     virtual void select();
     void up();
     void down();
-    void left();
-    void right();
+    virtual void left();
+    virtual void right();
     
     };
 #endif  // headerguard

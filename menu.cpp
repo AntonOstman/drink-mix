@@ -93,10 +93,10 @@ MenuItem Menu::getMenuItem(int index){
   
   }
   void Menu::left(){
-
+    menuItems[selectedMenu]->left();
   }
   void Menu::right(){
-
+    menuItems[selectedMenu]->right();
   }
 
 

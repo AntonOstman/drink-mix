@@ -2,7 +2,7 @@
 #include "LcdHandler.h"
 
 
-MenuItem::MenuItem(char menuText[], LcdHandler& lcd){
+MenuItem::MenuItem(const char menuText[], LcdHandler& lcd){
   this->menuText = menuText;
   this->lcd = &lcd;
 }
@@ -28,7 +28,12 @@ void MenuItem::action(ButtonType button){
   
   }
 
+void MenuItem::left(){
 
+}
+void MenuItem::right(){
+  
+}
 void MenuItem::select(){
   lcd->print("parent");
   

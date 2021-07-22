@@ -5,12 +5,19 @@
 #include "Menu.h"
 #include <Arduino.h>
 
-class menuTwo: public Menu{
-  
+class DrinkMenu: public Menu{
+  private:
+
+
   public:
   // use super class to construct
-    //menuTwo(int menuSize, LcdHandler& lcd): Menu(menuSize, lcd){}
-    
+    DrinkMenu(int menuSize, LcdHandler& lcd): Menu(menuSize, lcd){
+
+    }
+    void up() override;
+    void down() override;
+    void left() override;
+    void right() override;
   };
 
 
