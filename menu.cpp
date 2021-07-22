@@ -33,6 +33,8 @@ void Menu::printMenus(){
 
   lcd->clear();
   lcd->setCursor(0,0);
+  byte customCursor = byte(0);
+  lcd->write(customCursor);
   printMenu(selectedMenu);
   lcd->setCursor(0,1);
   if (selectedMenu > 0){
@@ -88,6 +90,7 @@ MenuItem Menu::getMenuItem(int index){
     menuButtonPress(UP);
 
   }
+
   void Menu::down(){
     menuButtonPress(DOWN);
   

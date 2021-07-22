@@ -91,18 +91,23 @@ void LcdHandler::doKey(int key){
     case 0:
       // do nothing when no key found
       break;
+    
     case 1:
-      currentMenu-> select();
+        currentMenu-> select();
       break;
+    
     case 2:
       currentMenu-> up();
       break;
+    
     case 3:
       currentMenu-> down();
       break;
+    
     case 4:
       currentMenu -> left();
       break;
+    
     case 5:
       currentMenu -> right();
       break;
@@ -139,10 +144,10 @@ void LcdHandler::setCursorPos(){
 int LcdHandler::getKey(){
   int analogPin = A0;
   int val = analogRead(analogPin);
-  if (val > 800){
+  if (val > 300){
     return 0;
     }
-  else if(val > 180){
+  else if(val > 200){
     return 1;
     }
   else if(val > 130){

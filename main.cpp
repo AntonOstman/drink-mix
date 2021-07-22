@@ -24,22 +24,48 @@ MenuFactory menuFactory;
 
 void setup() {
   // put your setup code here, to run once:
+  byte cursor[8] = {
+    B11000000,
+    B00110000,
+    B00011100,
+    B00000110,
+    B00011100,
+    B00110000,
+    B11000000,
+  };
 
     lcd.setupMenus();
-
+    lcd.createChar(0, cursor);
     lcd.begin(16, 2);
     lcd.clear();
     lcd.setCursor(0,0);
-    lcd.cursor();
+    // lcd.cursor();
     lcd.updateScreen();
     pinMode(PUMP_ONE, OUTPUT);
     pinMode(PUMP_TWO, OUTPUT);
 }
 
 
+// prints the ADC numbers indefinaterly for testing purposes
+void testADC(){
+  while(true){
+    lcd.setCursor(0,0);
+    lcd.print(lcd.getKey());
+    int val = analogRead(0);
+    lcd.print(" AD value: ");
+    lcd.print(val);
+    lcd.print("  ");
+
+
+  }
+
+
+}
+
 void loop() {
 
   // put your main code here, to run repeatedly:
+  // testADC();
   int key = lcd.getKey();
   if (lcd.checkNewKey(key)){
     lcd.doKey(key); 

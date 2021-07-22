@@ -11,9 +11,7 @@ class DrinkMenu: public Menu{
 
   public:
   // use super class to construct
-    DrinkMenu(int menuSize, LcdHandler& lcd): Menu(menuSize, lcd){
-
-    }
+    DrinkMenu(int menuSize, LcdHandler& lcd): Menu(menuSize, lcd){}
     void up() override;
     void down() override;
     void left() override;
