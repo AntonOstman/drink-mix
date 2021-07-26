@@ -18,15 +18,13 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
     {
     case 0:
     {
-        char const* q1 = "asdf";
-        char const* q2 = "hejsan2";
-        char const* q3 = "hejsan3";
-        char const* q4 = "hejsan4";
+        char const* q1 = "Drink Menu";
+        char const* q2 = "Toggle pump 1";
         
-        MenuPrinter* menu1 = new MenuPrinter(q1, lcd);
+        MenuPrinter* menu1 = new MenuPrinter(q2, lcd);
         MenuPrinter* menu2 = new MenuPrinter(q2, lcd);
-        MenuItem* menu3 = new MenuItem(q3,  lcd);
-        MixerItem* menu4 = new MixerItem(q4,  lcd);
+        MenuItem* menu3 = new MenuItem(q2,  lcd);
+        MixerItem* menu4 = new MixerItem(q1,  lcd);
 
         int menuSize = 4;
         Menu* menus = new Menu(menuSize, lcd);        
@@ -42,17 +40,20 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
     case 1:
     {
         char const* q1 = "Drink options";
-        char const* q2 = "shots";
-        char const* q3 = "50 %";
-        char const* q4 = "glhf";
+        char const* q2 = "Grogg: ";
+        char const* q3 = "pump 2";
+        char const* q4 = "pump 1";
         char const* q5 = "Back";
         
         
         MenuPrinter* menu1 = new MenuPrinter(q1, lcd);
-        MenuPrinter* menu2 = new MenuPrinter(q2, lcd);
-        MenuItem* menu3 = new MenuItem(q3,  lcd);
-        MenuItem* menu4 = new MenuItem(q4,  lcd);
+        GroggItem* menu2 = new GroggItem(q2, lcd);
+        VolumeItem* menu3 = new VolumeItem(q3,  lcd);
+        VolumeItem* menu4 = new VolumeItem(q4,  lcd);
         BackItem* menu5 = new BackItem(q5,  lcd);
+
+        menu3->setSelectedPump(lcd.PUMP_TWO);
+        menu4->setSelectedPump(lcd.PUMP_ONE);
 
         int menuSize = 5;
         Menu* menus = new Menu(menuSize, lcd);        

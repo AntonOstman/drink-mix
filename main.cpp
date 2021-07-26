@@ -33,7 +33,7 @@ void setup() {
     B00110000,
     B11000000,
   };
-
+    Serial.begin(9600);
     lcd.setupMenus();
     lcd.createChar(0, cursor);
     lcd.begin(16, 2);
@@ -50,8 +50,11 @@ void setup() {
 void testADC(){
   while(true){
     lcd.setCursor(0,0);
-    lcd.print(lcd.getKey());
-    int val = analogRead(0);
+    
+    int val = analogRead(A0);
+    lcd.print(lcd.getKey(val));
+    Serial.println(val);
+    delay(100);
     lcd.print(" AD value: ");
     lcd.print(val);
     lcd.print("  ");
@@ -65,12 +68,25 @@ void testADC(){
 void loop() {
 
   // put your main code here, to run repeatedly:
-  // testADC();
-  int key = lcd.getKey();
-  if (lcd.checkNewKey(key)){
-    lcd.doKey(key); 
-    lcd.updateScreen();
-  } 
+  //testADC();
+  int key = lcd.getNewKey2();
+  
+  // if(key == 1){
+  //     while(true){
+  //       Serial.println(key);
+  //       Serial.println(adRead);
+  //       while (true)
+  //       {
+  //         /* code */
+  //       }
+        
+  //     }
+  //   }
+  //if (lcd.checkNewKey(key)){
+    
+  lcd.doKey(key); 
+  lcd.updateScreen();
+  //} 
 
 
   lcd.setCursorPos();

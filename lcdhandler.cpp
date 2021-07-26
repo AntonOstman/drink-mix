@@ -69,21 +69,56 @@ void LcdHandler::updateScreen(){
  * 
  * 
  */
-int LcdHandler::getNewKey(){
+int LcdHandler::getNewKey3(){
   // wait until the current buttonm, if any, is released
-  while(getKey() != 0){
+  while(getKey2() != 0){
     // do nothing
     }
     // wait until a new button is pressed
-  int newKey = getKey();
+  int newKey = getKey2();
   while(newKey == 0){
     delay(150);
-    newKey = getKey();
+    newKey = getKey2();
     }  
   return newKey;
   }
 
 
+// this is horrible but works for now. should be changed later
+int LcdHandler::getNewKey2(){
+  // wait until the current buttonm, if any, is released
+  while(getKey2() != 0){
+    // do nothing
+    }
+    // wait until a new button is pressed
+  int newKey = getKey2();
+
+  while(newKey == 0){
+    // make sure that the new key found is an actual key press and not a random value from the
+    // ad conversion
+      newKey = doubleCheckKey();
+    }  
+  return newKey;
+  }
+
+int LcdHandler::doubleCheckKey(){
+
+bool twoDifferentValues = true;
+int correctValue;
+while(twoDifferentValues){
+
+
+  int firstKey = getKey2();
+  delay(100);
+  int secondKey = getKey2();
+
+  if (firstKey == secondKey){
+    twoDifferentValues = false;
+    correctValue = secondKey;
+    }
+  }
+  return correctValue;
+}
 
 void LcdHandler::doKey(int key){
     
@@ -141,13 +176,40 @@ void LcdHandler::setCursorPos(){
  * which means when button 1 is pressed there is a total of circa 2k ohm resistance
  */
 
-int LcdHandler::getKey(){
+int LcdHandler::getKey(int read){
+  
+  //int analogPin = A0;
+  //int val = analogRead(analogPin);
+  
+  if (read > 300){
+    return 0;
+    }
+  else if(read > 190){
+    return 1;
+    }
+  else if(read > 130){
+    return 2;
+    }
+  else if (read > 50){
+    return 3;
+    }
+  else if (read > 15){
+    return 4;
+    }
+  else{
+    return 5;
+     } 
+ }
+  
+int LcdHandler::getKey2(){
+  
   int analogPin = A0;
   int val = analogRead(analogPin);
+  
   if (val > 300){
     return 0;
     }
-  else if(val > 200){
+  else if(val > 190){
     return 1;
     }
   else if(val > 130){

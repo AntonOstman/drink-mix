@@ -45,6 +45,8 @@ class MixerItem: public MenuItem{
 class VolumeItem: public MenuItem{
   private:
     int volumeAmount;
+    int selectedPump;
+
 
   public:
   // use super class to construct
@@ -52,6 +54,8 @@ class VolumeItem: public MenuItem{
     void select() override;
     void left() override;
     void right() override;
+    void printAll() override;
+    void setSelectedPump(int pin);
   };
 
 
@@ -70,6 +74,30 @@ class BackItem: public MenuItem{
   // use super class to construct
     BackItem(const char menuText[], LcdHandler& lcd): MenuItem(menuText, lcd){}
     void select() override;
+  };
+
+
+#endif
+
+
+#ifndef MY_GROGGITEM_H // header guards
+#define MY_GROGGITEM_H
+
+#include "MenuItem.h"
+#include <Arduino.h>
+
+
+class GroggItem: public MenuItem{
+  private:
+    int volumeAmount;
+
+  public:
+  // use super class to construct
+    GroggItem(const char menuText[], LcdHandler& lcd): MenuItem(menuText, lcd){}
+    void select() override;
+    void left() override;
+    void right() override;
+    void printAll() override;
   };
 
 

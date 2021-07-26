@@ -15,7 +15,7 @@ class MenuItem{
     MenuItem(const char menuText[], LcdHandler& lcd);
     virtual ~MenuItem();
     void action(ButtonType button);
-    void printAll();
+    virtual void printAll();
     int getSize();
     virtual void select();
     void up();

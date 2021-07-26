@@ -18,8 +18,9 @@ class LcdHandler  : public LiquidCrystal{
 
   public:
 //    menuPrinter(char menuText[], lcdHandler& lcd): menuItem(menuText, lcd){}
-    const int PUMP_ONE = 3;
-    const int PUMP_TWO = 2;
+    const int PUMP_ONE = 2;
+    const int PUMP_TWO = 3;
+    const int LIQUID_SCALE = 10; 
     //const int MAIN_MENU = 0;
     //const int DRINK_MENU = 1;
 
@@ -36,6 +37,7 @@ class LcdHandler  : public LiquidCrystal{
     void changeMenu(MenuType menuType);
     void setupMenus();
     void setMainMenu();
+    int doubleCheckKey();
     void togglePin(int pin);
     void printCurrent();
     void resetLcd();
@@ -45,8 +47,10 @@ class LcdHandler  : public LiquidCrystal{
     void printAllMenus();
     void doKey(int key);
     void setCursorPos();
-    int getKey();
-    int getNewKey();
+    int getKey(int key);
+    int getKey2();
+    int getNewKey2();
+    int getNewKey3();
   };
 
   #endif

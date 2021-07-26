@@ -29,7 +29,7 @@ void MenuItem::action(ButtonType button){
   }
 
 void MenuItem::left(){
-
+  
 }
 void MenuItem::right(){
   
