@@ -52,7 +52,7 @@ void testADC(){
     lcd.setCursor(0,0);
     
     int val = analogRead(A0);
-    lcd.print(lcd.getKey(val));
+    lcd.print(lcd.getKey2(val));
     Serial.println(val);
     delay(100);
     lcd.print(" AD value: ");
@@ -69,7 +69,7 @@ void loop() {
 
   // put your main code here, to run repeatedly:
   //testADC();
-  int key = lcd.getNewKey2();
+  int key = lcd.getNewKey();
   
   // if(key == 1){
   //     while(true){

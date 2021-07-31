@@ -10,31 +10,17 @@ void MenuPrinter::select(){
   delay(1000);
   }  
 
-void MixerItem::select(){
+void MenuChangeItem::select(){
 
-  lcd->changeMenu(DRINK_MENU);
+  lcd->changeMenu(selectedMenu);
 
 }
+  void MenuChangeItem::changeMenuType(MenuType menuType){
 
-void BackItem::select(){
-
-  // think about changing to enums instead...
-  // reason it is not enum already is because index is chosen with the integers in lcdHandler 
-  // for which menu to choose in method changeMenu
-  int currentMenu = lcd->getMenuType();
-
-  switch (currentMenu)
-  {
-  case MAIN_MENU:
-    /* code */
-    break;
-  case DRINK_MENU:
-    lcd->changeMenu(MAIN_MENU);
-    break;
-  default:
-    break;
+    this->selectedMenu = menuType;
   }
-}
+
+
  // groggitem and volume item has same left and right, some functionality should be lifted up
 void VolumeItem::left(){
   if (volumeAmount > 0){

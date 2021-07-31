@@ -18,8 +18,11 @@ void LcdHandler::setupMenus(){
   MenuFactory menuFactory;
   Menu* mainMenu = menuFactory.createMenu(MAIN_MENU, *this);
   Menu* drinkMenu = menuFactory.createMenu(DRINK_MENU, *this);
+  Menu* funMenu = menuFactory.createMenu(FUN_MENU, *this);
+  
   menus[MAIN_MENU] = mainMenu;
   menus[DRINK_MENU] = drinkMenu;
+  menus[FUN_MENU] = funMenu;
   this->currentMenu = menus[MAIN_MENU];
 
 }
@@ -69,29 +72,15 @@ void LcdHandler::updateScreen(){
  * 
  * 
  */
-int LcdHandler::getNewKey3(){
-  // wait until the current buttonm, if any, is released
-  while(getKey2() != 0){
-    // do nothing
-    }
-    // wait until a new button is pressed
-  int newKey = getKey2();
-  while(newKey == 0){
-    delay(150);
-    newKey = getKey2();
-    }  
-  return newKey;
-  }
-
 
 // this is horrible but works for now. should be changed later
-int LcdHandler::getNewKey2(){
+int LcdHandler::getNewKey(){
   // wait until the current buttonm, if any, is released
-  while(getKey2() != 0){
+  while(getKey() != 0){
     // do nothing
     }
     // wait until a new button is pressed
-  int newKey = getKey2();
+  int newKey = getKey();
 
   while(newKey == 0){
     // make sure that the new key found is an actual key press and not a random value from the
@@ -108,9 +97,9 @@ int correctValue;
 while(twoDifferentValues){
 
 
-  int firstKey = getKey2();
+  int firstKey = getKey();
   delay(100);
-  int secondKey = getKey2();
+  int secondKey = getKey();
 
   if (firstKey == secondKey){
     twoDifferentValues = false;
@@ -132,7 +121,7 @@ void LcdHandler::doKey(int key){
       break;
     
     case 2:
-      currentMenu-> up();
+      currentMenu-> left();
       break;
     
     case 3:
@@ -140,25 +129,15 @@ void LcdHandler::doKey(int key){
       break;
     
     case 4:
-      currentMenu -> left();
+      currentMenu -> right();
       break;
     
     case 5:
-      currentMenu -> right();
+      currentMenu -> up();
       break;
      }
   }
 
-bool LcdHandler::checkNewKey(int newKey){
-  
-  if (newKey != keyPressed){
-    keyPressed = newKey;
-    return true;
-
-  }
-  return false;
-
-}
 
 void LcdHandler::setCursorPos(){
   currentMenu->setCursorPos();
@@ -176,7 +155,7 @@ void LcdHandler::setCursorPos(){
  * which means when button 1 is pressed there is a total of circa 2k ohm resistance
  */
 
-int LcdHandler::getKey(int read){
+int LcdHandler::getKey2(int read){
   
   //int analogPin = A0;
   //int val = analogRead(analogPin);
@@ -184,45 +163,45 @@ int LcdHandler::getKey(int read){
   if (read > 300){
     return 0;
     }
-  else if(read > 190){
-    return 1;
+  else if(read > 180){
+    return 1; // select
     }
-  else if(read > 130){
-    return 2;
+  else if(read > 110){
+    return 2; // left
     }
-  else if (read > 50){
-    return 3;
+  else if (read > 32){
+    return 3; // down
     }
-  else if (read > 15){
-    return 4;
+  else if (read > 12){
+    return 4; // right
     }
   else{
-    return 5;
+    return 5; // up
      } 
  }
   
-int LcdHandler::getKey2(){
+int LcdHandler::getKey(){
   
   int analogPin = A0;
-  int val = analogRead(analogPin);
+  int read = analogRead(analogPin);
   
-  if (val > 300){
+  if (read > 300){
     return 0;
     }
-  else if(val > 190){
-    return 1;
+  else if(read > 180){
+    return 1; // select
     }
-  else if(val > 130){
-    return 2;
+  else if(read > 110){
+    return 2; // left
     }
-  else if (val > 50){
-    return 3;
+  else if (read > 32){
+    return 3; // down
     }
-  else if (val > 15){
-    return 4;
+  else if (read > 12){
+    return 4; // right
     }
   else{
-    return 5;
+    return 5; // up
      } 
  }
   

@@ -14,7 +14,7 @@ class LcdHandler  : public LiquidCrystal{
     Menu** menus;
     MenuType menuType;
     int keyPressed = 0;
-    const int MENU_AMOUNT = 2;
+    const int MENU_AMOUNT = 3;
 
   public:
 //    menuPrinter(char menuText[], lcdHandler& lcd): menuItem(menuText, lcd){}
@@ -47,10 +47,9 @@ class LcdHandler  : public LiquidCrystal{
     void printAllMenus();
     void doKey(int key);
     void setCursorPos();
-    int getKey(int key);
-    int getKey2();
-    int getNewKey2();
-    int getNewKey3();
+    int getKey2(int key);
+    int getKey();
+    int getNewKey();
   };
 
   #endif

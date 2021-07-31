@@ -3,7 +3,8 @@
 
 enum MenuType {
     MAIN_MENU, // = 0
-    DRINK_MENU // = 1
+    DRINK_MENU, // = 1
+    FUN_MENU // 2
   };
   
   #endif

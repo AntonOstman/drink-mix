@@ -20,52 +20,81 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
     {
         char const* q1 = "Drink Menu";
         char const* q2 = "Toggle pump 1";
-        
+        char const* q3 = "Fun menu";
+
         MenuPrinter* menu1 = new MenuPrinter(q2, lcd);
-        MenuPrinter* menu2 = new MenuPrinter(q2, lcd);
-        MenuItem* menu3 = new MenuItem(q2,  lcd);
-        MixerItem* menu4 = new MixerItem(q1,  lcd);
+        MenuChangeItem* menu4 = new MenuChangeItem(q1,  lcd);
+        MenuChangeItem* funMenu = new MenuChangeItem(q3, lcd);
 
-        int menuSize = 4;
+        menu4->changeMenuType(DRINK_MENU);
+        funMenu->changeMenuType(FUN_MENU);
+        
+        int menuSize = 3;
+
         Menu* menus = new Menu(menuSize, lcd);        
-        menus->addMenuItem(0, menu1);
-        menus->addMenuItem(1, menu2);
-        menus->addMenuItem(2, menu3);
-        menus->addMenuItem(3, menu4);
 
+        menus->addMenuItem(0, menu1);
+        menus->addMenuItem(1, menu4);
+        menus->addMenuItem(2, funMenu);
         
         return menus;
         break;
     }
     case 1:
     {
-        char const* q1 = "Drink options";
         char const* q2 = "Grogg: ";
         char const* q3 = "pump 2";
         char const* q4 = "pump 1";
         char const* q5 = "Back";
         
         
-        MenuPrinter* menu1 = new MenuPrinter(q1, lcd);
         GroggItem* menu2 = new GroggItem(q2, lcd);
         VolumeItem* menu3 = new VolumeItem(q3,  lcd);
         VolumeItem* menu4 = new VolumeItem(q4,  lcd);
-        BackItem* menu5 = new BackItem(q5,  lcd);
+        MenuChangeItem* menu5 = new MenuChangeItem(q5,  lcd);
 
+
+        menu5->changeMenuType(DRINK_MENU);
         menu3->setSelectedPump(lcd.PUMP_TWO);
         menu4->setSelectedPump(lcd.PUMP_ONE);
+        
 
-        int menuSize = 5;
+        int menuSize = 4;
         Menu* menus = new Menu(menuSize, lcd);        
-        menus->addMenuItem(0, menu1);
-        menus->addMenuItem(1, menu2);
-        menus->addMenuItem(2, menu3);
-        menus->addMenuItem(3, menu4);
-        menus->addMenuItem(4, menu5);
+
+        menus->addMenuItem(0, menu2);
+        menus->addMenuItem(1, menu3);
+        menus->addMenuItem(2, menu4);
+        menus->addMenuItem(3, menu5);
         
         return menus;
         break;
     }
+
+    case 2:
+        char const* q1 = "Back";
+        char const* q2 = "Test your luck";
+        char const* q3 = "Random Grogg %";
+        
+        MenuChangeItem* menu1 = new MenuChangeItem(q1, lcd);
+        MenuItem* menu2 = new MenuItem(q2, lcd);
+        MenuItem* menu3 = new MenuItem(q3,  lcd);
+        
+        //BackItem* menu5 = new BackItem(q5,  lcd);
+
+        menu1->changeMenuType(MAIN_MENU);
+
+        int menuSize = 3;
+        Menu* menus = new Menu(menuSize, lcd);        
+
+        menus->addMenuItem(0, menu1);
+        menus->addMenuItem(1, menu2);
+        menus->addMenuItem(2, menu3);
+        //menus->addMenuItem(4, menu5);
+        
+        return menus;
+        break;
+
     default:
         break;
     }
