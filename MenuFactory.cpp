@@ -6,6 +6,10 @@
 #include "MenuItemContainer.h"
 #include "LcdHandler.h"
 #include "MenuFactory.h"
+#include "GroggItem.h"
+#include "MenuChangeItem.h"
+#include "VolumeItem.h"
+
 
 MenuFactory::MenuFactory(){
 
@@ -54,7 +58,7 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
         MenuChangeItem* menu5 = new MenuChangeItem(q5,  lcd);
 
 
-        menu5->changeMenuType(DRINK_MENU);
+        menu5->changeMenuType(MAIN_MENU);
         menu3->setSelectedPump(lcd.PUMP_TWO);
         menu4->setSelectedPump(lcd.PUMP_ONE);
         
