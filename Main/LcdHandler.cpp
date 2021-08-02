@@ -140,7 +140,7 @@ while(twoDifferentValues){
 
 
   int firstKey = getKey();
-  delay(100);
+  delay(50);
   int secondKey = getKey();
 
   if (firstKey == secondKey){

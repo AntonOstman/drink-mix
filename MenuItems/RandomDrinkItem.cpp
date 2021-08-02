@@ -17,8 +17,7 @@ void RandomDrinkItem::select(){
     }
     else{
         randomVolumeOne = rand() % lcd->MAX_VOLUME;
-        int spanPumpTwo = lcd->MAX_VOLUME - randomVolumeOne;  // span pump two makes sure does not pump more than max
-        randomVolumeTwo = rand() % spanPumpTwo;
+        randomVolumeTwo = lcd->MAX_VOLUME - randomVolumeOne;
         lcd->print("You got: ");
         lcd->print(randomVolumeOne);
         lcd->print("/");
