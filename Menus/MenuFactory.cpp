@@ -9,7 +9,7 @@
 #include "GroggItem.h"
 #include "MenuChangeItem.h"
 #include "VolumeItem.h"
-
+#include "RandomDrinkItem.h"
 
 MenuFactory::MenuFactory(){
 
@@ -78,11 +78,11 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
     case 2:
         char const* q1 = "Back";
         char const* q2 = "Test your luck";
-        char const* q3 = "Random Grogg %";
+        char const* q3 = "Random Grogg";
         
         MenuChangeItem* menu1 = new MenuChangeItem(q1, lcd);
         MenuItem* menu2 = new MenuItem(q2, lcd);
-        MenuItem* menu3 = new MenuItem(q3,  lcd);
+        RandomDrinkItem* menu3 = new RandomDrinkItem(q3,  lcd);
         
         //BackItem* menu5 = new BackItem(q5,  lcd);
 

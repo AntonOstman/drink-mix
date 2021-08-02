@@ -67,6 +67,48 @@ void LcdHandler::updateScreen(){
   
 }
 
+
+void LcdHandler::pumpAmount(int pumpAmountOne, int pumpAmountTwo){
+  int volumePumpOne = pumpAmountOne;
+  int volumePumpTwo = pumpAmountTwo;
+  
+  // we get three different cases which we need to handle accordingly to pump
+  // the correct amount
+  // 1. pumpone time is shorter, 2. pump one time is longer, 3. pump times are equal.
+  // this ensures they pump at the same time and the time that is shorter stops first.
+  togglePin(PUMP_ONE);
+  togglePin(PUMP_TWO);
+  
+  if (volumePumpOne < volumePumpTwo){
+    delay(volumePumpOne * LIQUID_SCALE);
+    togglePin(PUMP_ONE);
+    delay(volumePumpTwo * LIQUID_SCALE);
+    togglePin(PUMP_TWO);
+
+  }
+
+  else if (volumePumpOne > volumePumpTwo){
+    delay(volumePumpTwo * LIQUID_SCALE);
+    togglePin(PUMP_TWO);
+    delay(volumePumpOne * LIQUID_SCALE);
+    togglePin(PUMP_ONE);
+
+  }
+  else{
+    delay(volumePumpOne * LIQUID_SCALE);
+    togglePin(PUMP_ONE);
+    togglePin(PUMP_TWO);
+
+
+  }
+
+
+}
+
+
+
+
+
 /**
  * Loops until a new key is pressed. Then sets oldKey to the key found.
  * 
