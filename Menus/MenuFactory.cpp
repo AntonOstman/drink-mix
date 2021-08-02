@@ -79,21 +79,24 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
         char const* q1 = "Back";
         char const* q2 = "Test your luck";
         char const* q3 = "Random Grogg";
-        
+        char const* shotText = "Random shot";
+                
         MenuChangeItem* menu1 = new MenuChangeItem(q1, lcd);
         MenuItem* menu2 = new MenuItem(q2, lcd);
         RandomDrinkItem* menu3 = new RandomDrinkItem(q3,  lcd);
-        
-        //BackItem* menu5 = new BackItem(q5,  lcd);
+        RandomDrinkItem* shotItem = new RandomDrinkItem(shotText,  lcd);
 
+        //BackItem* menu5 = new BackItem(q5,  lcd);
+        shotItem->changeDrinkType(SHOT);
         menu1->changeMenuType(MAIN_MENU);
 
-        int menuSize = 3;
+        int menuSize = 4;
         Menu* menus = new Menu(menuSize, lcd);        
 
         menus->addMenuItem(0, menu1);
         menus->addMenuItem(1, menu2);
         menus->addMenuItem(2, menu3);
+        menus->addMenuItem(3, shotItem);
         //menus->addMenuItem(4, menu5);
         
         return menus;
