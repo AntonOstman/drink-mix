@@ -59,8 +59,8 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
 
 
         menu5->changeMenuType(MAIN_MENU);
-        menu3->setSelectedPump(lcd.PUMP_TWO);
-        menu4->setSelectedPump(lcd.PUMP_ONE);
+        menu3->setSelectedPump(ALCOHOL_PUMP);
+        menu4->setSelectedPump(SOFTDRINK_PUMP);
         
 
         int menuSize = 4;
@@ -77,12 +77,10 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
 
     case 2:
         char const* q1 = "Back";
-        char const* q2 = "Test your luck";
         char const* q3 = "Random Grogg";
         char const* shotText = "Random shot";
                 
         MenuChangeItem* menu1 = new MenuChangeItem(q1, lcd);
-        MenuItem* menu2 = new MenuItem(q2, lcd);
         RandomDrinkItem* menu3 = new RandomDrinkItem(q3,  lcd);
         RandomDrinkItem* shotItem = new RandomDrinkItem(shotText,  lcd);
 
@@ -90,13 +88,12 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
         shotItem->changeDrinkType(SHOT);
         menu1->changeMenuType(MAIN_MENU);
 
-        int menuSize = 4;
+        int menuSize = 3;
         Menu* menus = new Menu(menuSize, lcd);        
 
         menus->addMenuItem(0, menu1);
-        menus->addMenuItem(1, menu2);
-        menus->addMenuItem(2, menu3);
-        menus->addMenuItem(3, shotItem);
+        menus->addMenuItem(1, menu3);
+        menus->addMenuItem(2, shotItem);
         //menus->addMenuItem(4, menu5);
         
         return menus;

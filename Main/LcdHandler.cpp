@@ -14,6 +14,17 @@ void LcdHandler::resetLcd(){
 
 }
 
+void LcdHandler::pumpOne(int amount, PumpType pump){
+
+  if (pump == SOFTDRINK_PUMP){
+    pumpVolume(amount, 0);
+  }
+  else{
+    pumpVolume(0, amount);
+  }
+
+}
+
 void LcdHandler::setupMenus(){
   MenuFactory menuFactory;
   Menu* mainMenu = menuFactory.createMenu(MAIN_MENU, *this);
@@ -68,36 +79,35 @@ void LcdHandler::updateScreen(){
 }
 
 
-void LcdHandler::pumpAmount(int pumpAmountOne, int pumpAmountTwo){
-  int volumePumpOne = pumpAmountOne;
-  int volumePumpTwo = pumpAmountTwo;
+void LcdHandler::pumpVolume(int softDrinkVolume, int alcoholVolume){
   
   // we get three different cases which we need to handle accordingly to pump
   // the correct amount
   // 1. pumpone time is shorter, 2. pump one time is longer, 3. pump times are equal.
   // this ensures they pump at the same time and the time that is shorter stops first.
-  togglePin(PUMP_ONE);
-  togglePin(PUMP_TWO);
-  
-  if (volumePumpOne < volumePumpTwo){
-    delay(volumePumpOne * LIQUID_SCALE);
-    togglePin(PUMP_ONE);
-    delay(volumePumpTwo * LIQUID_SCALE);
-    togglePin(PUMP_TWO);
+  togglePin(SOFTDRINK_PIN);
+  togglePin(ALCOHOL_PIN);
+  resetLcd();
+  print("Pumping...");
+  if (softDrinkVolume < alcoholVolume){
+    delay(softDrinkVolume * LIQUID_SCALE);
+    togglePin(SOFTDRINK_PIN);
+    delay(alcoholVolume * LIQUID_SCALE);
+    togglePin(ALCOHOL_PIN);
 
   }
 
-  else if (volumePumpOne > volumePumpTwo){
-    delay(volumePumpTwo * LIQUID_SCALE);
-    togglePin(PUMP_TWO);
-    delay(volumePumpOne * LIQUID_SCALE);
-    togglePin(PUMP_ONE);
+  else if (softDrinkVolume > alcoholVolume){
+    delay(alcoholVolume * LIQUID_SCALE);
+    togglePin(ALCOHOL_PIN);
+    delay(softDrinkVolume * LIQUID_SCALE);
+    togglePin(SOFTDRINK_PIN);
 
   }
   else{
-    delay(volumePumpOne * LIQUID_SCALE);
-    togglePin(PUMP_ONE);
-    togglePin(PUMP_TWO);
+    delay(softDrinkVolume * LIQUID_SCALE);
+    togglePin(SOFTDRINK_PIN);
+    togglePin(ALCOHOL_PIN);
 
 
   }

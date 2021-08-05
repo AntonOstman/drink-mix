@@ -21,16 +21,16 @@ void GroggItem::right(){
 
 void GroggItem::printAll(){
   lcd->print(menuText);
-  int volumePumpOne = volumeAmount;
-  int volumePumpTwo = 100 - volumeAmount;
-  lcd->print(volumePumpOne);
+  int volumeSoftDrink = volumeAmount;
+  int volumeAlcoholPump = 100 - volumeAmount;
+  lcd->print(volumeSoftDrink);
   lcd->print("/");
-  lcd->print(volumePumpTwo);
+  lcd->print(volumeAlcoholPump);
 }
 
 void GroggItem::select(){
-  int volumePumpOne = volumeAmount;
-  int volumePumpTwo = 100 - volumeAmount;
-  lcd->pumpAmount(volumePumpOne, volumePumpTwo);
+  int volumeSoftDrink = volumeAmount;
+  int volumeAlcoholPump = 100 - volumeAmount;
+  lcd->pumpVolume(volumeSoftDrink, volumeAlcoholPump);
 
 }

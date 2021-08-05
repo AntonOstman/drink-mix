@@ -5,12 +5,12 @@
 
 #include "MenuItem.h"
 #include <Arduino.h>
-
+#include "PumpType.h"
 
 class VolumeItem: public MenuItem{
   private:
     int volumeAmount = 0;
-    int selectedPump = 0;
+    PumpType selectedPump = SOFTDRINK_PUMP;
 
 
   public:
@@ -20,7 +20,7 @@ class VolumeItem: public MenuItem{
     void left() override;
     void right() override;
     void printAll() override;
-    void setSelectedPump(int pin);
+    void setSelectedPump(PumpType pumpType);
   };
 
 

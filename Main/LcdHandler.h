@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 #include "MenuType.h"
+#include "PumpType.h"
 
 class Menu;
 
@@ -15,12 +16,11 @@ class LcdHandler  : public LiquidCrystal{
     MenuType menuType;
     int keyPressed = 0;
     const int MENU_AMOUNT = 3;
-
+    const int LIQUID_SCALE = 10;
   public:
 //    menuPrinter(char menuText[], lcdHandler& lcd): menuItem(menuText, lcd){}
-    const int PUMP_ONE = 2;
-    const int PUMP_TWO = 3;
-    const int LIQUID_SCALE = 10; 
+    const int SOFTDRINK_PIN = 2;
+    const int ALCOHOL_PIN = 3; 
     const int MAX_VOLUME = 100;
     //const int MAIN_MENU = 0;
     //const int DRINK_MENU = 1;
@@ -48,7 +48,8 @@ class LcdHandler  : public LiquidCrystal{
     void printAllMenus();
     void doKey(int key);
     void setCursorPos();
-    void pumpAmount(int pumpOneAmount, int pumpTwoAmount);
+    void pumpVolume(int softDrinkAmount, int alcoholPump);
+    void pumpOne(int pumpVolume, PumpType pump);
     int getKey2(int key);
     int getKey();
     int getNewKey();

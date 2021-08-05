@@ -19,9 +19,7 @@ void VolumeItem::right(){
 }
 
 void VolumeItem::select(){
-  lcd->togglePin(selectedPump);
-  delay(volumeAmount * lcd->LIQUID_SCALE);
-  lcd->togglePin(selectedPump);
+  lcd->pumpOne(volumeAmount, selectedPump);
 
 }
 
@@ -31,7 +29,7 @@ void VolumeItem::printAll(){
   lcd->print(volumeAmount);
 
 }
-void VolumeItem::setSelectedPump(int pin){
-  selectedPump = pin;
+void VolumeItem::setSelectedPump(PumpType pumpType){
+  selectedPump = pumpType;
 }
 

@@ -6,28 +6,28 @@
 
 
 void RandomDrinkItem::select(){
-    int randomVolumeOne = 0;
-    int randomVolumeTwo = 0;
+    int randomSoftDrinkVolume = 0;
+    int randomAlcoholVolume = 0;
     lcd->resetLcd();
 
     if (drinkType == SHOT){
-        randomVolumeTwo = rand() % (lcd->MAX_VOLUME / 10);
+        randomAlcoholVolume = rand() % (lcd->MAX_VOLUME / 10);
         lcd->print("You got: ");
-        lcd->print(randomVolumeTwo);
+        lcd->print(randomAlcoholVolume);
     }
     else{
-        randomVolumeOne = rand() % lcd->MAX_VOLUME;
-        randomVolumeTwo = lcd->MAX_VOLUME - randomVolumeOne;
+        randomSoftDrinkVolume = rand() % lcd->MAX_VOLUME;
+        randomAlcoholVolume = lcd->MAX_VOLUME - randomSoftDrinkVolume;
         lcd->print("You got: ");
-        lcd->print(randomVolumeOne);
+        lcd->print(randomSoftDrinkVolume);
         lcd->print("/");
-        lcd->print(randomVolumeTwo);
+        lcd->print(randomAlcoholVolume);
     
     }
     // give user time to read volume 
     delay(1500);
 
-    lcd->pumpAmount(randomVolumeOne, randomVolumeTwo);
+    lcd->pumpVolume(randomSoftDrinkVolume, randomAlcoholVolume);
 
 
 }
