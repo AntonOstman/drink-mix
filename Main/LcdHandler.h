@@ -17,10 +17,11 @@ class LcdHandler  : public LiquidCrystal{
     int keyPressed = 0;
     const int MENU_AMOUNT = 3;
     const int LIQUID_SCALE = 10;
-  public:
-//    menuPrinter(char menuText[], lcdHandler& lcd): menuItem(menuText, lcd){}
     const int SOFTDRINK_PIN = 2;
     const int ALCOHOL_PIN = 3; 
+  public:
+//    menuPrinter(char menuText[], lcdHandler& lcd): menuItem(menuText, lcd){}
+
     const int MAX_VOLUME = 100;
     //const int MAIN_MENU = 0;
     //const int DRINK_MENU = 1;
@@ -50,6 +51,8 @@ class LcdHandler  : public LiquidCrystal{
     void setCursorPos();
     void pumpVolume(int softDrinkAmount, int alcoholPump);
     void pumpOne(int pumpVolume, PumpType pump);
+    void togglePump(PumpType pump);
+    void roulette();
     int getKey2(int key);
     int getKey();
     int getNewKey();

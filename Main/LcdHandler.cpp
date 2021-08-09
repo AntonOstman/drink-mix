@@ -25,6 +25,19 @@ void LcdHandler::pumpOne(int amount, PumpType pump){
 
 }
 
+void LcdHandler::togglePump(PumpType pump){
+  int pin = pump + 2;
+
+  togglePin(pin);
+
+}
+
+
+void LcdHandler::roulette(){
+  currentMenu->playRoulette();
+
+}
+
 void LcdHandler::setupMenus(){
   MenuFactory menuFactory;
   Menu* mainMenu = menuFactory.createMenu(MAIN_MENU, *this);

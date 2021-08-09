@@ -8,7 +8,7 @@ Menu::Menu(int menuSize, LcdHandler& lcd) {
   this->menuItems = new MenuItem*[menuSize];
   this->lcd = &lcd;
   this->menuSize = menuSize;
-  selectedMenu = 0;
+  selectedMenu = menuSize - 1;
   cursorPos = 0;
   
   }
@@ -105,3 +105,59 @@ MenuItem Menu::getMenuItem(int index){
 
    
     
+void Menu::playRoulette(){
+  lcd->resetLcd();
+  
+  lcd->setCursor(0,0);
+  int scrollSpeed = 120;
+  int randomItemIndex;
+  int randomItemAmount = 10;
+  String megaText = String("");
+
+  MenuItem* randomMenuItem;
+  const char* randomText;
+  
+  
+  for (int i = 0; i < randomItemAmount; i++)
+  {
+    randomItemIndex = rand() % menuSize;
+    randomMenuItem = menuItems[randomItemIndex];
+
+    randomText = randomMenuItem->getText();
+    
+    for (int i = 0; i < randomMenuItem->getSize(); i++){
+      if (megaText.length() == 16){
+        megaText.remove(0,1);
+        megaText += randomText[i];
+        scrollSpeed += 3;
+        delay(scrollSpeed);
+
+      }
+      else{
+        megaText.concat(randomText[i]);
+      }
+      lcd->resetLcd();
+      lcd->print(megaText);
+
+    }
+    // add two spaces in between each item
+    int spaces = 2;
+    for (int i = 0; i < spaces; i++)
+    {
+      megaText.remove(0,1);
+      megaText += " ";
+      delay(scrollSpeed);
+
+      lcd->resetLcd();
+      lcd->print(megaText);
+    }
+    
+
+  }
+  lcd->resetLcd();
+  lcd->print("!!");
+  lcd->print(randomText);
+  lcd->print("!!");
+  delay(2000);
+  randomMenuItem->select();
+}

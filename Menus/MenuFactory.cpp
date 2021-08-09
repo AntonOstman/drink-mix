@@ -3,13 +3,13 @@
 
 #include "MenuType.h"
 #include "Menu.h"
-#include "MenuItemContainer.h"
 #include "LcdHandler.h"
 #include "MenuFactory.h"
 #include "GroggItem.h"
 #include "MenuChangeItem.h"
 #include "VolumeItem.h"
 #include "RandomDrinkItem.h"
+#include "RouletteItem.h"
 
 MenuFactory::MenuFactory(){
 
@@ -26,7 +26,7 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
         char const* q2 = "Toggle pump 1";
         char const* q3 = "Fun menu";
 
-        MenuPrinter* menu1 = new MenuPrinter(q2, lcd);
+        MenuItem* menu1 = new MenuItem(q2, lcd);
         MenuChangeItem* menu4 = new MenuChangeItem(q1,  lcd);
         MenuChangeItem* funMenu = new MenuChangeItem(q3, lcd);
 
@@ -38,8 +38,8 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
         Menu* menus = new Menu(menuSize, lcd);        
 
         menus->addMenuItem(0, menu1);
-        menus->addMenuItem(1, menu4);
-        menus->addMenuItem(2, funMenu);
+        menus->addMenuItem(2, menu4);
+        menus->addMenuItem(1, funMenu);
         
         return menus;
         break;
@@ -66,10 +66,10 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
         int menuSize = 4;
         Menu* menus = new Menu(menuSize, lcd);        
 
-        menus->addMenuItem(0, menu2);
+        menus->addMenuItem(3, menu2);
         menus->addMenuItem(1, menu3);
         menus->addMenuItem(2, menu4);
-        menus->addMenuItem(3, menu5);
+        menus->addMenuItem(0, menu5);
         
         return menus;
         break;
@@ -79,27 +79,29 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
         char const* q1 = "Back";
         char const* q3 = "Random Grogg";
         char const* shotText = "Random shot";
-                
+        char const* roulette = "Roulette";
+
         MenuChangeItem* menu1 = new MenuChangeItem(q1, lcd);
         RandomDrinkItem* menu3 = new RandomDrinkItem(q3,  lcd);
         RandomDrinkItem* shotItem = new RandomDrinkItem(shotText,  lcd);
-
+        RouletteItem* rouletteItem = new RouletteItem(roulette, lcd);
         //BackItem* menu5 = new BackItem(q5,  lcd);
         shotItem->changeDrinkType(SHOT);
         menu1->changeMenuType(MAIN_MENU);
 
-        int menuSize = 3;
+        int menuSize = 4;
         Menu* menus = new Menu(menuSize, lcd);        
 
-        menus->addMenuItem(0, menu1);
-        menus->addMenuItem(1, menu3);
+        menus->addMenuItem(3, menu3);
         menus->addMenuItem(2, shotItem);
-        //menus->addMenuItem(4, menu5);
-        
+        menus->addMenuItem(1, rouletteItem);
+        menus->addMenuItem(0, menu1);
+
         return menus;
         break;
 
     default:
+        return NULL;
         break;
     }
 

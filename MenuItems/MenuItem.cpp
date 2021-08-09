@@ -1,7 +1,6 @@
 #include "MenuItem.h"
 #include "LcdHandler.h"
 
-
 MenuItem::MenuItem(const char menuText[], LcdHandler& lcd){
   this->menuText = menuText;
   this->lcd = &lcd;
@@ -35,6 +34,10 @@ void MenuItem::right(){
   
 }
 void MenuItem::select(){
-  lcd->print("parent");
-  
+  lcd->togglePump(SOFTDRINK_PUMP);
   }
+
+const char* MenuItem::getText(){
+  return menuText;
+
+}
