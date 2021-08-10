@@ -109,9 +109,10 @@ void Menu::playRoulette(){
   lcd->resetLcd();
   
   lcd->setCursor(0,0);
-  int scrollSpeed = 120;
+  int scrollSpeed = 5;
+  int scrollDeceleration = 1;
   int randomItemIndex;
-  int randomItemAmount = 10;
+  int randomItemAmount = 20;
   String megaText = String("");
 
   MenuItem* randomMenuItem;
@@ -120,6 +121,10 @@ void Menu::playRoulette(){
   
   for (int i = 0; i < randomItemAmount; i++)
   {
+    // when more than half have been scrolled increase the deceleration
+    if (i > randomItemAmount - 4 ){
+      scrollDeceleration += 1;
+    }
     randomItemIndex = rand() % menuSize;
     randomMenuItem = menuItems[randomItemIndex];
 
@@ -129,7 +134,7 @@ void Menu::playRoulette(){
       if (megaText.length() == 16){
         megaText.remove(0,1);
         megaText += randomText[i];
-        scrollSpeed += 3;
+        scrollSpeed += scrollDeceleration;
         delay(scrollSpeed);
 
       }
@@ -146,6 +151,7 @@ void Menu::playRoulette(){
     {
       megaText.remove(0,1);
       megaText += " ";
+      scrollSpeed += scrollDeceleration;
       delay(scrollSpeed);
 
       lcd->resetLcd();

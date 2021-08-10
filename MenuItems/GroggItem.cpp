@@ -19,6 +19,11 @@ void GroggItem::right(){
   }
 }
 
+void GroggItem::setVolume(int volume){
+  volumeAmount = volume;
+
+}
+
 void GroggItem::printAll(){
   lcd->print(menuText);
   int volumeSoftDrink = volumeAmount;

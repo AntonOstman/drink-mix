@@ -21,6 +21,7 @@ class VolumeItem: public MenuItem{
     void right() override;
     void printAll() override;
     void setSelectedPump(PumpType pumpType);
+    void setVolume(int volume);
   };
 
 

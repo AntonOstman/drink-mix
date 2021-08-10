@@ -23,6 +23,11 @@ void VolumeItem::select(){
 
 }
 
+void VolumeItem::setVolume(int volume){
+  volumeAmount = volume;
+
+}
+
 void VolumeItem::printAll(){
   lcd->print(menuText);
   lcd->print(" vol: ");

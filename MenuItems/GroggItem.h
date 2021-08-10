@@ -18,6 +18,7 @@ class GroggItem: public MenuItem{
     void left() override;
     void right() override;
     void printAll() override;
+    void setVolume(int volume);
   };
 
 

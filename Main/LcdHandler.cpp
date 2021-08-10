@@ -40,13 +40,17 @@ void LcdHandler::roulette(){
 
 void LcdHandler::setupMenus(){
   MenuFactory menuFactory;
+  
   Menu* mainMenu = menuFactory.createMenu(MAIN_MENU, *this);
   Menu* drinkMenu = menuFactory.createMenu(DRINK_MENU, *this);
   Menu* funMenu = menuFactory.createMenu(FUN_MENU, *this);
+  Menu* rouletteMenu = menuFactory.createMenu(ROULETTE_MENU, *this);
   
+
   menus[MAIN_MENU] = mainMenu;
   menus[DRINK_MENU] = drinkMenu;
   menus[FUN_MENU] = funMenu;
+  menus[ROULETTE_MENU] = rouletteMenu;
   this->currentMenu = menus[MAIN_MENU];
 
 }
@@ -163,7 +167,7 @@ while(twoDifferentValues){
 
 
   int firstKey = getKey();
-  delay(50);
+  delay(75);
   int secondKey = getKey();
 
   if (firstKey == secondKey){

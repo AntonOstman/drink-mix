@@ -15,7 +15,7 @@ class MenuFactory{
   public:
 
     MenuFactory();
-    Menu* createMenu(int menuType, LcdHandler& lcd);
+    Menu* createMenu(MenuType menuType, LcdHandler& lcd);
 
     };
 #endif  // headerguard

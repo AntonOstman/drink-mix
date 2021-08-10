@@ -16,11 +16,11 @@ MenuFactory::MenuFactory(){
 }
 
 
-Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
+Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
     
     switch (menuType)
     {
-    case 0:
+    case MAIN_MENU:
     {
         char const* q1 = "Drink Menu";
         char const* q2 = "Toggle pump 1";
@@ -44,7 +44,7 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
         return menus;
         break;
     }
-    case 1:
+    case DRINK_MENU:
     {
         char const* q2 = "Grogg: ";
         char const* q3 = "pump 2";
@@ -75,7 +75,8 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
         break;
     }
 
-    case 2:
+    case FUN_MENU:
+    {
         char const* q1 = "Back";
         char const* q3 = "Random Grogg";
         char const* shotText = "Random shot";
@@ -99,7 +100,49 @@ Menu* MenuFactory::createMenu(int menuType, LcdHandler& lcd){
 
         return menus;
         break;
+    }
+    case ROULETTE_MENU:
+{
+        char const* harmlessDrink = "gott gott";
+        char const* smallShot = "mumsigt";
+        char const* deathDrink = "döds grogg";
+        char const* deathShot = "big shot";
+        char const* q3 = "Rnd Grogg";
+        char const* shotText = "Rnd shot";
+        char const* roulette = "Roulette";
 
+        VolumeItem* sodapopShot = new VolumeItem(smallShot, lcd);
+        VolumeItem* sodapopDrink = new VolumeItem(harmlessDrink, lcd);
+        VolumeItem* bigShot = new VolumeItem(deathShot, lcd);
+        GroggItem* bigDrink = new GroggItem(deathDrink, lcd);
+        RandomDrinkItem* menu3 = new RandomDrinkItem(q3,  lcd);
+        RandomDrinkItem* shotItem = new RandomDrinkItem(shotText,  lcd);
+
+        RouletteItem* rouletteItem = new RouletteItem(roulette, lcd);
+        //BackItem* menu5 = new BackItem(q5,  lcd);
+        shotItem->changeDrinkType(SHOT);
+        sodapopShot->setSelectedPump(SOFTDRINK_PUMP);
+        sodapopShot->setVolume(10);
+        sodapopDrink->setSelectedPump(SOFTDRINK_PUMP);
+        sodapopDrink->setVolume(50);
+        bigDrink->setVolume(50); // 50/50 grogg
+        bigShot->setSelectedPump(ALCOHOL_PUMP);
+        bigShot->setVolume(10);
+
+        int menuSize = 7;
+        Menu* menus = new Menu(menuSize, lcd);        
+
+        menus->addMenuItem(6, bigDrink);
+        menus->addMenuItem(5, bigShot);
+        menus->addMenuItem(4, sodapopDrink);
+        menus->addMenuItem(3, sodapopShot);
+        menus->addMenuItem(2, shotItem);
+        menus->addMenuItem(1, rouletteItem);
+        menus->addMenuItem(0, menu3);
+        
+        return menus;
+        break;
+}
     default:
         return NULL;
         break;
