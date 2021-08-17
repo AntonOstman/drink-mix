@@ -103,9 +103,9 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
     }
     case ROULETTE_MENU:
 {
-        char const* harmlessDrink = "gott gott";
+        char const* harmlessDrink = "gottans";
         char const* smallShot = "mumsigt";
-        char const* deathDrink = "döds grogg";
+        char const* deathDrink = "50/50 grogg";
         char const* deathShot = "big shot";
         char const* q3 = "Rnd Grogg";
         char const* shotText = "Rnd shot";

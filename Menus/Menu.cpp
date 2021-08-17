@@ -122,9 +122,17 @@ void Menu::playRoulette(){
   for (int i = 0; i < randomItemAmount; i++)
   {
     // when more than half have been scrolled increase the deceleration
-    if (i > randomItemAmount - 4 ){
+    if (i > randomItemAmount - 2 ){
+      scrollDeceleration += 10;
+    }
+    else if (i > randomItemAmount - 3 ){
+      scrollDeceleration += 5;
+
+    }
+    else if (i > randomItemAmount - 4 ){
       scrollDeceleration += 1;
     }
+
     randomItemIndex = rand() % menuSize;
     randomMenuItem = menuItems[randomItemIndex];
 
@@ -164,6 +172,6 @@ void Menu::playRoulette(){
   lcd->print("!!");
   lcd->print(randomText);
   lcd->print("!!");
-  delay(2000);
+  delay(3000);
   randomMenuItem->select();
 }
