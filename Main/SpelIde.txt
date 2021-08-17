@@ -1,0 +1,6 @@
+---------------GISSA SIFFRAN------------
+En väljer mellan 1-10 den andra gissar på siffran. Har man mer än 3 ifrån förlorar man annars vinner man. Förloraren Får en shot
+
+---------------STOPPA HJULET-------------
+Som roulette fast man stannar själv. Det går snabbare och snabbare tills man stannar på select.
+
