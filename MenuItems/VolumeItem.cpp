@@ -30,9 +30,7 @@ void VolumeItem::printAll(){
   lcd->print(volumeAmount);
 
 }
-void VolumeItem::setSelectedPump(PumpType pumpType){
-  selectedPump = pumpType;
-}
+
 
 void VolumeItem::setMax(int max){
  this->max = max;

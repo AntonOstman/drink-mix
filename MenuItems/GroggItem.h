@@ -9,7 +9,6 @@
 
 class GroggItem: public MenuItem{
   private:
-    int volumeAmount = 0;
 
   public:
   // use super class to construct
@@ -18,7 +17,6 @@ class GroggItem: public MenuItem{
     void left() override;
     void right() override;
     void printAll() override;
-    void setVolume(int volume);
   };
 
 

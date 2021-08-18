@@ -24,23 +24,28 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
     case MAIN_MENU:
     {
         char const* q1 = "Drink Menu";
-        char const* q2 = "Toggle pump 1";
+        char const* q2 = "Toggle sodapump";
+        char const* alcoPumpText = "Toggle alcopump";
         char const* q3 = "Fun menu";
 
         MenuItem* menu1 = new MenuItem(q2, lcd);
+        MenuItem* alcoPump = new MenuItem(alcoPumpText, lcd);
         MenuChangeItem* menu4 = new MenuChangeItem(q1,  lcd);
         MenuChangeItem* funMenu = new MenuChangeItem(q3, lcd);
-
+        
+        alcoPump->setSelectedPump(ALCOHOL_PUMP);
         menu4->changeMenuType(DRINK_MENU);
         funMenu->changeMenuType(FUN_MENU);
         
-        int menuSize = 3;
+        int menuSize = 4;
 
         Menu* menus = new Menu(menuSize, lcd);        
-
-        menus->addMenuItem(0, menu1);
+        
+        menus->addMenuItem(3, funMenu);
         menus->addMenuItem(2, menu4);
-        menus->addMenuItem(1, funMenu);
+        menus->addMenuItem(1, alcoPump);
+        menus->addMenuItem(0, menu1);
+
         
         return menus;
         break;
@@ -48,8 +53,8 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
     case DRINK_MENU:
     {
         char const* q2 = "Grogg: ";
-        char const* q3 = "pump 2";
-        char const* q4 = "pump 1";
+        char const* q3 = "alcoholpump: ";
+        char const* q4 = "Sodapump: ";
         char const* q5 = "Back";
         
         

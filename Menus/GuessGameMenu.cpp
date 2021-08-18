@@ -7,7 +7,7 @@ void GuessGameMenu::select(){
     
     
         lcd->resetLcd();
-        lcd->print("Vinnaren är .... ");
+        lcd->print("Vinnaren .... ");
         delay(5000);
         int numberToGuess = menuItems[0]->getVolumeAmount();
         int numberGuessed = menuItems[1]->getVolumeAmount();

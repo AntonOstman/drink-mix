@@ -7,7 +7,6 @@
 
 class RandomDrinkItem: public MenuItem{
   private:
-    int volumeAmount = 0;
     DrinkType drinkType = DRINK;
 
   public:

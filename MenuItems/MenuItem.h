@@ -12,6 +12,7 @@ class MenuItem{
     const char* menuText;
     LcdHandler* lcd;
     int volumeAmount = 0;
+    PumpType selectedPump = SOFTDRINK_PUMP;
 
   public:
 
@@ -28,5 +29,6 @@ class MenuItem{
     virtual void right();
     void setVolume(int volume);
     int getVolumeAmount();
+    void setSelectedPump(PumpType PumpType);
     };
 #endif  // headerguard

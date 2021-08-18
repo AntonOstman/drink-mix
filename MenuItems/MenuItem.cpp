@@ -37,8 +37,12 @@ void MenuItem::right(){
   
 }
 void MenuItem::select(){
-  lcd->togglePump(SOFTDRINK_PUMP);
+  lcd->togglePump(selectedPump);
   }
+
+void MenuItem::setSelectedPump(PumpType pumpType){
+  selectedPump = pumpType;
+}
 
 const char* MenuItem::getText(){
   return menuText;
