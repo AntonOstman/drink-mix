@@ -5,6 +5,7 @@
 #include <LiquidCrystal.h>
 #include "MenuType.h"
 #include "PumpType.h"
+#include "ButtonType.h"
 
 class Menu;
 
@@ -15,7 +16,7 @@ class LcdHandler  : public LiquidCrystal{
     Menu** menus;
     MenuType menuType;
     int keyPressed = 0;
-    const int MENU_AMOUNT = 4;
+    const int MENU_AMOUNT = 5;
     const int LIQUID_SCALE = 200;
     const int SOFTDRINK_PIN = 2;
     const int ALCOHOL_PIN = 3; 
@@ -39,7 +40,7 @@ class LcdHandler  : public LiquidCrystal{
     void changeMenu(MenuType menuType);
     void setupMenus();
     void setMainMenu();
-    int doubleCheckKey();
+    
     void togglePin(int pin);
     void printCurrent();
     void resetLcd();
@@ -47,15 +48,17 @@ class LcdHandler  : public LiquidCrystal{
     void updateScreen();
     void changeMenu(Menu* newMenu);
     void printAllMenus();
-    void doKey(int key);
     void setCursorPos();
     void pumpVolume(int softDrinkAmount, int alcoholPump);
     void pumpOne(int pumpVolume, PumpType pump);
     void togglePump(PumpType pump);
     void roulette();
-    int getKey2(int key);
-    int getKey();
-    int getNewKey();
+
+    void doKey(ButtonType key);
+    ButtonType doubleCheckKey();
+    ButtonType getKey2(int key);
+    ButtonType getKey();
+    ButtonType getNewKey();
   };
 
   #endif

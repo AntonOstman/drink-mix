@@ -71,7 +71,7 @@ void loop() {
 
   // put your main code here, to run repeatedly:
   //testADC();
-  int key = lcd.getNewKey();
+  ButtonType key = lcd.getNewKey();
   
   // if(key == 1){
   //     while(true){

@@ -1,6 +1,7 @@
 
 #include "LcdHandler.h"
 #include "Menu.h"
+#include "GuessGameMenu.h"
 #include "MenuFactory.h"
 
 void LcdHandler::changeMenu(Menu* newMenu){
@@ -26,6 +27,9 @@ void LcdHandler::pumpOne(int amount, PumpType pump){
 }
 
 void LcdHandler::togglePump(PumpType pump){
+  // the pumps need to be in order with the enum delcaration 
+  // otherwise this will toggle the wrong pump
+  // switch case could probably be better. 
   int pin = pump + 2;
 
   togglePin(pin);
@@ -45,12 +49,13 @@ void LcdHandler::setupMenus(){
   Menu* drinkMenu = menuFactory.createMenu(DRINK_MENU, *this);
   Menu* funMenu = menuFactory.createMenu(FUN_MENU, *this);
   Menu* rouletteMenu = menuFactory.createMenu(ROULETTE_MENU, *this);
-  
+  Menu* guessGameMenu = menuFactory.createMenu(GUESS_GAME, *this);
 
   menus[MAIN_MENU] = mainMenu;
   menus[DRINK_MENU] = drinkMenu;
   menus[FUN_MENU] = funMenu;
   menus[ROULETTE_MENU] = rouletteMenu;
+  menus[GUESS_GAME] = guessGameMenu;
   this->currentMenu = menus[MAIN_MENU];
 
 }
@@ -134,8 +139,6 @@ void LcdHandler::pumpVolume(int softDrinkVolume, int alcoholVolume){
 
 
 
-
-
 /**
  * Loops until a new key is pressed. Then sets oldKey to the key found.
  * 
@@ -143,13 +146,13 @@ void LcdHandler::pumpVolume(int softDrinkVolume, int alcoholVolume){
  */
 
 // this is horrible but works for now. should be changed later
-int LcdHandler::getNewKey(){
+ButtonType LcdHandler::getNewKey(){
   // wait until the current buttonm, if any, is released
   while(getKey() != 0){
     // do nothing
     }
     // wait until a new button is pressed
-  int newKey = getKey();
+  ButtonType newKey = getKey();
 
   while(newKey == 0){
     // make sure that the new key found is an actual key press and not a random value from the
@@ -159,16 +162,16 @@ int LcdHandler::getNewKey(){
   return newKey;
   }
 
-int LcdHandler::doubleCheckKey(){
+ButtonType LcdHandler::doubleCheckKey(){
 
 bool twoDifferentValues = true;
-int correctValue;
+ButtonType correctValue;
 while(twoDifferentValues){
 
 
-  int firstKey = getKey();
+  ButtonType firstKey = getKey();
   delay(75);
-  int secondKey = getKey();
+  ButtonType secondKey = getKey();
 
   if (firstKey == secondKey){
     twoDifferentValues = false;
@@ -178,30 +181,30 @@ while(twoDifferentValues){
   return correctValue;
 }
 
-void LcdHandler::doKey(int key){
+void LcdHandler::doKey(ButtonType key){
     
   switch(key){
-    case 0:
+    case NONE:
       // do nothing when no key found
       break;
     
-    case 1:
+    case SELECT:
         currentMenu-> select();
       break;
     
-    case 2:
+    case LEFT:
       currentMenu-> left();
       break;
     
-    case 3:
+    case DOWN:
       currentMenu-> down();
       break;
     
-    case 4:
+    case RIGHT:
       currentMenu -> right();
       break;
     
-    case 5:
+    case UP:
       currentMenu -> up();
       break;
      }
@@ -224,53 +227,53 @@ void LcdHandler::setCursorPos(){
  * which means when button 1 is pressed there is a total of circa 2k ohm resistance
  */
 
-int LcdHandler::getKey2(int read){
+ButtonType LcdHandler::getKey2(int read){
   
   //int analogPin = A0;
   //int val = analogRead(analogPin);
   
   if (read > 300){
-    return 0;
+    return NONE;
     }
   else if(read > 180){
-    return 1; // select
+    return SELECT; // select
     }
   else if(read > 110){
-    return 2; // left
+    return LEFT; // left
     }
   else if (read > 32){
-    return 3; // down
+    return DOWN; // down
     }
   else if (read > 12){
-    return 4; // right
+    return RIGHT; // right
     }
   else{
-    return 5; // up
+    return UP; // up
      } 
  }
   
-int LcdHandler::getKey(){
+ButtonType LcdHandler::getKey(){
   
   int analogPin = A0;
   int read = analogRead(analogPin);
   
   if (read > 300){
-    return 0;
+    return NONE;
     }
   else if(read > 180){
-    return 1; // select
+    return SELECT; // select
     }
   else if(read > 110){
-    return 2; // left
+    return LEFT; // left
     }
   else if (read > 32){
-    return 3; // down
+    return DOWN; // down
     }
   else if (read > 12){
-    return 4; // right
+    return RIGHT; // right
     }
   else{
-    return 5; // up
+    return UP; // up
      } 
  }
   

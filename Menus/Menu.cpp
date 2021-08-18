@@ -103,11 +103,14 @@ MenuItem Menu::getMenuItem(int index){
   }
 
 
-   
+void Menu::playGuessGame(){
+
+}
     
 void Menu::playRoulette(){
+
+
   lcd->resetLcd();
-  
   lcd->setCursor(0,0);
   int scrollSpeed = 5;
   int scrollDeceleration = 1;
@@ -133,11 +136,13 @@ void Menu::playRoulette(){
       scrollDeceleration += 1;
     }
 
+    // randomly get a menuItem from the menu
     randomItemIndex = rand() % menuSize;
     randomMenuItem = menuItems[randomItemIndex];
-
     randomText = randomMenuItem->getText();
     
+    // loop through the text of the menuitem adding it to the roulette text and decrease the rate at which
+    // a new character is added
     for (int i = 0; i < randomMenuItem->getSize(); i++){
       if (megaText.length() == 16){
         megaText.remove(0,1);
@@ -146,6 +151,7 @@ void Menu::playRoulette(){
         delay(scrollSpeed);
 
       }
+
       else{
         megaText.concat(randomText[i]);
       }

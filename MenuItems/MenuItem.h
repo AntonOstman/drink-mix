@@ -11,7 +11,8 @@ class MenuItem{
   protected:
     const char* menuText;
     LcdHandler* lcd;
-    
+    int volumeAmount = 0;
+
   public:
 
     MenuItem(const char menuText[], LcdHandler& lcd);
@@ -25,6 +26,7 @@ class MenuItem{
     void down();
     virtual void left();
     virtual void right();
-    
+    void setVolume(int volume);
+    int getVolumeAmount();
     };
 #endif  // headerguard

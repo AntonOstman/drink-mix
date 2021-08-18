@@ -2,12 +2,14 @@
 #define MY_BUTTONTYPE_H
 
 enum ButtonType {
-  UP,
-  DOWN,
+  NONE, // = 0 ...
+  SELECT, // = 1
   LEFT,
+  DOWN,
   RIGHT,
-  SELECT,
-  NONE
+  UP
+
+
   };
   
   #endif

@@ -10,6 +10,7 @@
 #include "VolumeItem.h"
 #include "RandomDrinkItem.h"
 #include "RouletteItem.h"
+#include "GuessGameMenu.h"
 
 MenuFactory::MenuFactory(){
 
@@ -78,21 +79,26 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
     case FUN_MENU:
     {
         char const* q1 = "Back";
+        char const* guessGameText = "Guess game";
         char const* q3 = "Random Grogg";
         char const* shotText = "Random shot";
         char const* roulette = "Roulette";
 
         MenuChangeItem* menu1 = new MenuChangeItem(q1, lcd);
+        MenuChangeItem* guessGame = new MenuChangeItem(guessGameText, lcd);
         RandomDrinkItem* menu3 = new RandomDrinkItem(q3,  lcd);
         RandomDrinkItem* shotItem = new RandomDrinkItem(shotText,  lcd);
         RouletteItem* rouletteItem = new RouletteItem(roulette, lcd);
+        
+
         //BackItem* menu5 = new BackItem(q5,  lcd);
         shotItem->changeDrinkType(SHOT);
         menu1->changeMenuType(MAIN_MENU);
-
-        int menuSize = 4;
+        guessGame->changeMenuType(GUESS_GAME);
+        int menuSize = 5;
         Menu* menus = new Menu(menuSize, lcd);        
 
+        menus->addMenuItem(4, guessGame);
         menus->addMenuItem(3, menu3);
         menus->addMenuItem(2, shotItem);
         menus->addMenuItem(1, rouletteItem);
@@ -143,6 +149,28 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         return menus;
         break;
 }
+    case GUESS_GAME:
+    {
+        char const* knowerText = "Choose number:";
+        char const* guesserText = "Guess number:";
+        
+        VolumeItem* guesserItem = new VolumeItem(knowerText,  lcd);
+        VolumeItem* knowerItem = new VolumeItem(guesserText,  lcd);
+
+        guesserItem->setIncrease(1);
+        guesserItem->setMax(10);
+        knowerItem->setIncrease(1);
+        knowerItem->setMax(10);
+
+        int menuSize = 2;
+        GuessGameMenu* menus = new GuessGameMenu(menuSize, lcd);        
+
+        menus->addMenuItem(0, guesserItem);
+        menus->addMenuItem(1, knowerItem);
+
+        return menus;
+        break;
+    }
     default:
         return NULL;
         break;

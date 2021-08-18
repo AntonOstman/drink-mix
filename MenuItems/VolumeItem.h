@@ -9,9 +9,9 @@
 
 class VolumeItem: public MenuItem{
   private:
-    int volumeAmount = 0;
     PumpType selectedPump = SOFTDRINK_PUMP;
-
+    int max = 100;
+    int increase = 5;
 
   public:
   // use super class to construct
@@ -21,7 +21,8 @@ class VolumeItem: public MenuItem{
     void right() override;
     void printAll() override;
     void setSelectedPump(PumpType pumpType);
-    void setVolume(int volume);
+    void setMax(int max);
+    void setIncrease(int increase);
   };
 
 

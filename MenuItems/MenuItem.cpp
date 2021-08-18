@@ -28,9 +28,12 @@ void MenuItem::action(ButtonType button){
   }
 
 void MenuItem::left(){
-  
+  volumeAmount -= 1;
+
 }
+
 void MenuItem::right(){
+  volumeAmount += 1;
   
 }
 void MenuItem::select(){
@@ -39,5 +42,14 @@ void MenuItem::select(){
 
 const char* MenuItem::getText(){
   return menuText;
+
+}
+
+int MenuItem::getVolumeAmount(){
+  return volumeAmount;
+}
+
+void MenuItem::setVolume(int volume){
+  volumeAmount = volume;
 
 }

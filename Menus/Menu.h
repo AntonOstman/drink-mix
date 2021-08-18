@@ -29,6 +29,7 @@ class Menu {
     void printMenu(int index);
     void printMenus();
     void playRoulette();
+    void playGuessGame();
     virtual void select();
     virtual void up();
     virtual void down();
