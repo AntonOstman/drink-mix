@@ -13,6 +13,7 @@ class Menu {
     int cursorPos;
     int selectedMenu;
     int menuSize;
+    int indexPositon;
     MenuItem** menuItems;
     LcdHandler* lcd;
     
@@ -24,7 +25,7 @@ class Menu {
     void printCurrent();
     void moveMenu(ButtonType buttontype);
     void setCursorPos();
-    void addMenuItem(int index, MenuItem* item);
+    void addMenuItem(MenuItem* item);
     int getMenuItemAmount();
     void printMenu(int index);
     virtual void printMenus();

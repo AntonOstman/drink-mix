@@ -28,7 +28,7 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         char const* alcoPumpText = "Toggle alcopump";
         char const* q3 = "Fun menu";
 
-        MenuItem* menu1 = new MenuItem(q2, lcd);
+        MenuItem* sodaPump = new MenuItem(q2, lcd);
         MenuItem* alcoPump = new MenuItem(alcoPumpText, lcd);
         MenuChangeItem* menu4 = new MenuChangeItem(q1,  lcd);
         MenuChangeItem* funMenu = new MenuChangeItem(q3, lcd);
@@ -41,10 +41,11 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
 
         Menu* menus = new Menu(menuSize, lcd);        
         
-        menus->addMenuItem(3, funMenu);
-        menus->addMenuItem(2, menu4);
-        menus->addMenuItem(1, alcoPump);
-        menus->addMenuItem(0, menu1);
+        menus->addMenuItem(alcoPump);
+        menus->addMenuItem(sodaPump);
+        menus->addMenuItem(funMenu);
+        menus->addMenuItem(menu4);
+
 
         
         return menus;
@@ -58,24 +59,25 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         char const* q5 = "Back";
         
         
-        GroggItem* menu2 = new GroggItem(q2, lcd);
-        VolumeItem* menu3 = new VolumeItem(q3,  lcd);
-        VolumeItem* menu4 = new VolumeItem(q4,  lcd);
-        MenuChangeItem* menu5 = new MenuChangeItem(q5,  lcd);
+        GroggItem* groggItem = new GroggItem(q2, lcd);
+        VolumeItem* alcoPump = new VolumeItem(q3,  lcd);
+        VolumeItem* sodaPump = new VolumeItem(q4,  lcd);
+        MenuChangeItem* backItem = new MenuChangeItem(q5,  lcd);
 
 
-        menu5->changeMenuType(MAIN_MENU);
-        menu3->setSelectedPump(ALCOHOL_PUMP);
-        menu4->setSelectedPump(SOFTDRINK_PUMP);
+        backItem->changeMenuType(MAIN_MENU);
+        alcoPump->setSelectedPump(ALCOHOL_PUMP);
+        sodaPump->setSelectedPump(SOFTDRINK_PUMP);
         
 
         int menuSize = 4;
         Menu* menus = new Menu(menuSize, lcd);        
 
-        menus->addMenuItem(3, menu2);
-        menus->addMenuItem(1, menu3);
-        menus->addMenuItem(2, menu4);
-        menus->addMenuItem(0, menu5);
+        menus->addMenuItem(backItem);
+        menus->addMenuItem(alcoPump);
+        menus->addMenuItem(sodaPump);
+        menus->addMenuItem(groggItem);
+
         
         return menus;
         break;
@@ -89,25 +91,25 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         char const* shotText = "Random shot";
         char const* roulette = "Roulette";
 
-        MenuChangeItem* menu1 = new MenuChangeItem(q1, lcd);
+        MenuChangeItem* backItem = new MenuChangeItem(q1, lcd);
         MenuChangeItem* guessGame = new MenuChangeItem(guessGameText, lcd);
-        RandomDrinkItem* menu3 = new RandomDrinkItem(q3,  lcd);
-        RandomDrinkItem* shotItem = new RandomDrinkItem(shotText,  lcd);
+        RandomDrinkItem* randomGrogg = new RandomDrinkItem(q3,  lcd);
+        RandomDrinkItem* randomShot = new RandomDrinkItem(shotText,  lcd);
         RouletteItem* rouletteItem = new RouletteItem(roulette, lcd);
         
 
         //BackItem* menu5 = new BackItem(q5,  lcd);
-        shotItem->changeDrinkType(SHOT);
-        menu1->changeMenuType(MAIN_MENU);
+        randomShot->changeDrinkType(SHOT);
+        backItem->changeMenuType(MAIN_MENU);
         guessGame->changeMenuType(GUESS_GAME);
         int menuSize = 5;
         Menu* menus = new Menu(menuSize, lcd);        
-
-        menus->addMenuItem(4, guessGame);
-        menus->addMenuItem(3, rouletteItem);
-        menus->addMenuItem(2, shotItem);
-        menus->addMenuItem(1, menu3);
-        menus->addMenuItem(0, menu1);
+        
+        menus->addMenuItem(backItem);
+        menus->addMenuItem(randomShot);
+        menus->addMenuItem(randomGrogg);
+        menus->addMenuItem(rouletteItem);
+        menus->addMenuItem(guessGame);
 
         return menus;
         break;
@@ -150,14 +152,14 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         int menuSize = 8;
         Menu* menus = new Menu(menuSize, lcd);
 
-        menus->addMenuItem(7, guessingGameItem);
-        menus->addMenuItem(6, bigDrink);
-        menus->addMenuItem(5, bigShot);
-        menus->addMenuItem(4, sodapopDrink);
-        menus->addMenuItem(3, sodapopShot);
-        menus->addMenuItem(2, shotItem);
-        menus->addMenuItem(1, rouletteItem);
-        menus->addMenuItem(0, menu3);
+        menus->addMenuItem(guessingGameItem);
+        menus->addMenuItem(bigDrink);
+        menus->addMenuItem(bigShot);
+        menus->addMenuItem(sodapopDrink);
+        menus->addMenuItem(sodapopShot);
+        menus->addMenuItem(shotItem);
+        menus->addMenuItem(rouletteItem);
+        menus->addMenuItem(menu3);
         
         return menus;
         break;
@@ -178,8 +180,8 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         int menuSize = 2;
         GuessGameMenu* menus = new GuessGameMenu(menuSize, lcd);        
 
-        menus->addMenuItem(1, guesserItem);
-        menus->addMenuItem(0, knowerItem);
+        menus->addMenuItem(knowerItem);
+        menus->addMenuItem(guesserItem);
 
         return menus;
         break;

@@ -10,7 +10,7 @@ Menu::Menu(int menuSize, LcdHandler& lcd) {
   this->menuSize = menuSize;
   selectedMenu = menuSize - 1;
   cursorPos = 0;
-  
+  indexPositon = 0;
   }
 
 Menu::~Menu(){
@@ -83,9 +83,9 @@ void Menu::setCursorPos(){
   lcd->setCursor(cursorPos, 0);
   }
 
-void Menu::addMenuItem(int index, MenuItem* item){
-  menuItems[index] = item;
-  
+void Menu::addMenuItem(MenuItem* item){
+  menuItems[indexPositon] = item;
+  indexPositon++;
   }
 
 MenuItem Menu::getMenuItem(int index){
