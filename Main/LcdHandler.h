@@ -17,7 +17,7 @@ class LcdHandler  : public LiquidCrystal{
     MenuType menuType;
     int keyPressed = 0;
     const int MENU_AMOUNT = 5;
-    const int LIQUID_SCALE = 200;
+    const int LIQUID_SCALE = 250;
     const int SOFTDRINK_PIN = 2;
     const int ALCOHOL_PIN = 3; 
   public:

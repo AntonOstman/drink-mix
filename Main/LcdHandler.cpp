@@ -103,37 +103,34 @@ void LcdHandler::updateScreen(){
 
 void LcdHandler::pumpVolume(int softDrinkVolume, int alcoholVolume){
   
-  // we get three different cases which we need to handle accordingly to pump
-  // the correct amount
-  // 1. pumpone time is shorter, 2. pump one time is longer, 3. pump times are equal.
-  // this ensures they pump at the same time and the time that is shorter stops first.
+  // we pump the correct times for each pump by either first waiting for softDrinkpump or alcoholPump
+  // to complete. After that we pump the difference on the one which should pump for longer
+  // if the difference is 0 the pin will toggle immedietly becuase of multiplication with 0
+
+
+
   togglePin(SOFTDRINK_PIN);
   togglePin(ALCOHOL_PIN);
+  int volumeDifference = abs(softDrinkVolume - alcoholVolume);
+
   resetLcd();
   print("Pumping...");
-  if (softDrinkVolume < alcoholVolume){
+  
+  if (softDrinkVolume <= alcoholVolume){
     delay(softDrinkVolume * LIQUID_SCALE);
     togglePin(SOFTDRINK_PIN);
+    delay(volumeDifference * LIQUID_SCALE);
+    togglePin(ALCOHOL_PIN);
+
+  }
+
+  else {
     delay(alcoholVolume * LIQUID_SCALE);
     togglePin(ALCOHOL_PIN);
-
-  }
-
-  else if (softDrinkVolume > alcoholVolume){
-    delay(alcoholVolume * LIQUID_SCALE);
-    togglePin(ALCOHOL_PIN);
-    delay(softDrinkVolume * LIQUID_SCALE);
+    delay(volumeDifference * LIQUID_SCALE);
     togglePin(SOFTDRINK_PIN);
 
   }
-  else{
-    delay(softDrinkVolume * LIQUID_SCALE);
-    togglePin(SOFTDRINK_PIN);
-    togglePin(ALCOHOL_PIN);
-
-
-  }
-
 
 }
 
@@ -162,7 +159,16 @@ ButtonType LcdHandler::getNewKey(){
   return newKey;
   }
 
+/**
+ * Returns the key which has been pressed only if they match with a intervall
+ * This makes sure no random key will be pressed becasue of random AD value
+ * Also makes sure no key is double pressed when only intending to press once.
+ * 
+ */
+
 ButtonType LcdHandler::doubleCheckKey(){
+
+int interval = 75;
 
 bool twoDifferentValues = true;
 ButtonType correctValue;
@@ -170,7 +176,7 @@ while(twoDifferentValues){
 
 
   ButtonType firstKey = getKey();
-  delay(75);
+  delay(interval);
   ButtonType secondKey = getKey();
 
   if (firstKey == secondKey){

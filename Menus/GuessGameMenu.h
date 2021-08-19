@@ -6,6 +6,9 @@
 #include <Arduino.h>
 
 class GuessGameMenu: public Menu{
+  private:
+    int gameRound;
+
 
   public:
   // use super class to construct
@@ -14,7 +17,9 @@ class GuessGameMenu: public Menu{
 
     }
     void select() override;
-
+    void printMenus() override;
+    void up() override;
+    void down() override;
   };
 
 

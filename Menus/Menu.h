@@ -22,14 +22,15 @@ class Menu {
     void nextItem();
     void action(ButtonType button);
     void printCurrent();
-    void menuButtonPress(ButtonType buttontype);
+    void moveMenu(ButtonType buttontype);
     void setCursorPos();
     void addMenuItem(int index, MenuItem* item);
     int getMenuItemAmount();
     void printMenu(int index);
-    void printMenus();
+    virtual void printMenus();
     void playRoulette();
     void playGuessGame();
+    void printSelectedMenu();
     virtual void select();
     virtual void up();
     virtual void down();

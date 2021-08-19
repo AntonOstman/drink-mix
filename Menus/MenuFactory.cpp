@@ -104,9 +104,9 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         Menu* menus = new Menu(menuSize, lcd);        
 
         menus->addMenuItem(4, guessGame);
-        menus->addMenuItem(3, menu3);
+        menus->addMenuItem(3, rouletteItem);
         menus->addMenuItem(2, shotItem);
-        menus->addMenuItem(1, rouletteItem);
+        menus->addMenuItem(1, menu3);
         menus->addMenuItem(0, menu1);
 
         return menus;
@@ -114,13 +114,15 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
     }
     case ROULETTE_MENU:
 {
-        char const* harmlessDrink = "gottans";
-        char const* smallShot = "mumsigt";
+        char const* harmlessDrink = "cola:)";
+        char const* smallShot = "small shot";
         char const* deathDrink = "50/50 grogg";
         char const* deathShot = "big shot";
         char const* q3 = "Rnd Grogg";
         char const* shotText = "Rnd shot";
         char const* roulette = "Roulette";
+        char const* guessGameText = "guessing game";
+
 
         VolumeItem* sodapopShot = new VolumeItem(smallShot, lcd);
         VolumeItem* sodapopDrink = new VolumeItem(harmlessDrink, lcd);
@@ -129,8 +131,13 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         RandomDrinkItem* menu3 = new RandomDrinkItem(q3,  lcd);
         RandomDrinkItem* shotItem = new RandomDrinkItem(shotText,  lcd);
 
+        MenuChangeItem* guessingGameItem = new MenuChangeItem(guessGameText, lcd);
         RouletteItem* rouletteItem = new RouletteItem(roulette, lcd);
+
+
         //BackItem* menu5 = new BackItem(q5,  lcd);
+
+        guessingGameItem->changeMenuType(GUESS_GAME);
         shotItem->changeDrinkType(SHOT);
         sodapopShot->setSelectedPump(SOFTDRINK_PUMP);
         sodapopShot->setVolume(10);
@@ -140,9 +147,10 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         bigShot->setSelectedPump(ALCOHOL_PUMP);
         bigShot->setVolume(10);
 
-        int menuSize = 7;
-        Menu* menus = new Menu(menuSize, lcd);        
+        int menuSize = 8;
+        Menu* menus = new Menu(menuSize, lcd);
 
+        menus->addMenuItem(7, guessingGameItem);
         menus->addMenuItem(6, bigDrink);
         menus->addMenuItem(5, bigShot);
         menus->addMenuItem(4, sodapopDrink);
@@ -170,8 +178,8 @@ Menu* MenuFactory::createMenu(MenuType menuType, LcdHandler& lcd){
         int menuSize = 2;
         GuessGameMenu* menus = new GuessGameMenu(menuSize, lcd);        
 
-        menus->addMenuItem(0, guesserItem);
-        menus->addMenuItem(1, knowerItem);
+        menus->addMenuItem(1, guesserItem);
+        menus->addMenuItem(0, knowerItem);
 
         return menus;
         break;

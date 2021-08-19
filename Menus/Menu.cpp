@@ -29,21 +29,31 @@ int Menu::getMenuItemAmount(){
   
   }
 
+/**
+ * Prints all menus in the MenuItems array
+ *  
+ **/
+ 
 void Menu::printMenus(){
 
+  printSelectedMenu();
+  if (selectedMenu > 0){
+    printMenu(selectedMenu - 1);  
+    }
+  }
+
+void Menu::printSelectedMenu(){
   lcd->clear();
   lcd->setCursor(0,0);
   byte customCursor = byte(0);
   lcd->write(customCursor);
   printMenu(selectedMenu);
   lcd->setCursor(0,1);
-  if (selectedMenu > 0){
-    printMenu(selectedMenu - 1);  
-    }
-  }
+  
+}
 
 
-void Menu::menuButtonPress(ButtonType buttontype){
+void Menu::moveMenu(ButtonType buttontype){
   // if selected menu is out of range then do nothing
   // otherwise we print the menus which are selected
   
@@ -87,12 +97,12 @@ MenuItem Menu::getMenuItem(int index){
   
   }
   void Menu::up(){
-    menuButtonPress(UP);
+    moveMenu(UP);
 
   }
 
   void Menu::down(){
-    menuButtonPress(DOWN);
+    moveMenu(DOWN);
   
   }
   void Menu::left(){
@@ -178,6 +188,9 @@ void Menu::playRoulette(){
   lcd->print("!!");
   lcd->print(randomText);
   lcd->print("!!");
+  delay(3000);
+  lcd->resetLcd();
+  lcd->print("prepare.. :)");
   delay(3000);
   randomMenuItem->select();
 }
